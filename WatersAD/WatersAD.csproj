@@ -40,10 +40,9 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
-
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" />
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\watersad.svg" Color="#3D405B" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -57,9 +56,58 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+	  <None Remove="Resources\Fonts\DMSans-Bold.ttf" />
+	  <None Remove="Resources\Fonts\DMSans-Medium.ttf" />
+	  <None Remove="Resources\Fonts\DMSans-Regular.ttf" />
+	  <None Remove="Resources\Images\aaaa.jpg" />
+	  <None Remove="Resources\Images\aaaaa.jpg" />
+	  <None Remove="Resources\Images\aaaaaa.jpg" />
+	  <None Remove="Resources\Images\account.png" />
+	  <None Remove="Resources\Images\folder.png" />
+	  <None Remove="Resources\Images\home.png" />
+	  <None Remove="Resources\Images\info.png" />
+	  <None Remove="Resources\Images\invoice.png" />
+	  <None Remove="Resources\Images\login.png" />
+	  <None Remove="Resources\Images\logoblue.png" />
+	  <None Remove="Resources\Images\logout.png" />
+	  <None Remove="Resources\Images\pdf.png" />
+	  <None Remove="Resources\Images\pexels.jpg" />
+	  <None Remove="Resources\Images\pricelist.png" />
+	  <None Remove="Resources\Images\recycledwater.png" />
+	  <None Remove="Resources\Images\services.png" />
+	  <None Remove="Resources\Images\trash.png" />
+	  <None Remove="Resources\Images\userimage.png" />
+	  <None Remove="Resources\Images\usersettings.png" />
+	  <None Remove="Resources\Images\watermeter.png" />
+	  <None Remove="Resources\Images\watertap.png" />
+	  <None Remove="Resources\Images\watertapone.png" />
+	  <None Remove="Resources\Images\wet.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="8.0.1" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.92" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.92" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\HomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ProfilePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\RequestWaterMeterPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ServicePriceListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              x:Class="WatersAD.Views.LoginPage"
+             xmlns:viewModels="clr-namespace:WatersAD.ViewModels"
+             x:DataType="viewModels:LoginViewModel"
+            
+             Title="Login">
+
+ 
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*"
+          RowSpacing="20"
+          Margin="20,100,20,40">
+
+        <Image Grid.Row="0"
+               Source="logoblue.png"
+               Aspect="AspectFit"
+               HeightRequest="150"
+               WidthRequest="150" />
+        <Label Grid.Row="1"
+               Text="Login"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+
+        <Frame Grid.Row="2"
+               Padding="15"
+               BackgroundColor="White">
+
+            <VerticalStackLayout>
+
+                <Entry Placeholder="Email"
+                       x:Name="EntEmail"
+                       Text="{Binding Email}"/>
+                <Label Text="{Binding EmailErrorMessage}" 
+               TextColor="Red"
+               IsVisible="{Binding EmailErrorMessage}" />
+
+                <Entry Placeholder="Password"
+                       IsPassword="True"
+                       x:Name="EntPassword"
+                       Text="{Binding Password}"/>
+                <Label Text="{Binding PasswordErrorMessage}" 
+               TextColor="Red"
+               IsVisible="{Binding PasswordErrorMessage}" />
+            </VerticalStackLayout>
+        </Frame>
+
+        <Button Grid.Row="3"
+                Text="Entrar"
+                FontSize="Medium"
+                x:Name="BtnSignIn" 
+                Command="{Binding SignInCommand}"
+                />
+        <HorizontalStackLayout Grid.Row="4"
+                               Spacing="2"
+                               HorizontalOptions="Center"
+                               VerticalOptions="EndAndExpand">
+            <Label Text="Não tem conta ? " />
+            <Label Text="Faça o registro agora" TextColor="{StaticResource Magenta }" FontAttributes="Bold">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="TapRegister"
+                                         />
+                </Label.GestureRecognizers>
+            </Label>
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>

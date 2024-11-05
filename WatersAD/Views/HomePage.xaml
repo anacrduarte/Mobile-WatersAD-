@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WatersAD.Views.HomePage"
+             Title="Home">
+    <ScrollView>
+        <StackLayout>
+            <Grid>
+        <!-- Imagem de Fundo -->
+        <Image Source="pexels.jpg" 
+               Aspect="AspectFit"
+               Opacity="0.7" />
+        <!-- Define transparência da imagem -->
+
+        <!-- Texto Sobreposto -->
+     
+        <StackLayout VerticalOptions="Center" >
+            <Label Text="A. Duarte é" 
+                   FontSize="24" 
+                   TextColor="White" 
+                   HorizontalOptions="Start"
+                   FontFamily="DMRegular" 
+                   Margin="15,0,0,0"/>
+
+            <!-- Textos Rotativos -->
+            <StackLayout x:Name="RotatingTextContainer" HorizontalOptions="Center">
+                        <Label x:Name="Text1" Text="Fonte de Vida" FontSize="26" FontFamily="DMBold" TextColor="{StaticResource Magenta}" IsVisible="True" HorizontalOptions="Center"/>
+                        <Label x:Name="Text2" Text="Inovação" FontSize="26" FontFamily="DMBold"  TextColor="{StaticResource Magenta}" IsVisible="False" HorizontalOptions="Center"/>
+                        <Label x:Name="Text3" Text="Progresso" FontSize="26" FontFamily="DMBold"  TextColor="{StaticResource Magenta}" IsVisible="False" HorizontalOptions="Center"/>
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+
+        <StackLayout Padding="20" Spacing="10">
+            <Label Text="Sobre a Empresa"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource Black}"
+                       HorizontalOptions="Center"
+                       Margin="0,10,0,10"/>
+
+                <Label Text="Águas Duarte é uma empresa de distribuição de água, sediada em Braga, que se orgulha de oferecer soluções inovadoras e sustentáveis para a gestão de recursos hídricos."
+                       FontSize="16"
+                       TextColor="{StaticResource Secondary}"
+                       LineBreakMode="WordWrap"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Start"
+                       Margin="10,0,10,0"/>
+
+                <Label Text="Com uma equipa altamente especializada e infraestruturas modernas, a Águas Duarte diferencia-se pela capacidade de atender a uma vasta gama de clientes, sempre com foco na personalização do serviço. "
+                       FontSize="16"
+                       TextColor="{StaticResource Secondary}"
+                       LineBreakMode="WordWrap"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Start"
+                       Margin="10,0,10,10"/>
+            
+        </StackLayout>
+            <CarouselView ItemsSource="{Binding ImageSources}" >
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding}" 
+                                           Aspect="AspectFill"
+                                           HeightRequest="250" />
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+
+            <StackLayout Padding="20" Spacing="20" >
+                <Label Text="Horários"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource Primary}"
+                       HorizontalOptions="Center"
+                       Margin="0,20,0,20"/>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Label Text="Seg - Sex" FontSize="16" TextColor="{StaticResource Gray600}" />
+                    <Label Text="  8:00 AM - 8:00 PM" FontSize="16" TextColor="{StaticResource Gray600}" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Label Text="Sábado" FontSize="16" TextColor="{StaticResource Gray600}" />
+                    <Label Text="  8:00 AM - 2:00 PM" FontSize="16" TextColor="{StaticResource Gray600}" />
+                </StackLayout>
+            </StackLayout>
+
+
+            <StackLayout Padding="20" Spacing="10" BackgroundColor="{StaticResource Secondary}">
+            <Label Text="Contatos"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource Magenta}"
+                       HorizontalOptions="Center"
+                       Margin="0,20,0,10"/>
+
+                <Label Text="Endereço: "
+                       FontSize="16"
+                       TextColor="{StaticResource Primary}"
+                       LineBreakMode="WordWrap"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Start"
+                       Margin="10,0,10,0"/>
+                <Label Text="Braga, Portugal"
+        FontSize="16"
+        TextColor="{StaticResource Magenta}"
+        LineBreakMode="WordWrap"
+        HorizontalOptions="Center"
+        VerticalOptions="Start"
+        Margin="10,0,10,0"/>
+
+                <Label Text="Telefone:"
+                       FontSize="16"
+                       TextColor="{StaticResource Primary}"
+                       LineBreakMode="WordWrap"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Start"
+                       Margin="10,0,10,0"/>
+                <Label Text="(+351) 912 345 678"
+           FontSize="16"
+           TextColor="{StaticResource Magenta}"
+           LineBreakMode="WordWrap"
+           HorizontalOptions="Center"
+           VerticalOptions="Start"
+           Margin="10,0,10,0"/>
+
+                <Label Text="Email:"
+                       FontSize="16"
+                       TextColor="{StaticResource Primary}"
+                       LineBreakMode="WordWrap"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Start"
+                       Margin="10,0,10,0"/>
+                <Label Text=" A.Duarte@company.com"
+         FontSize="16"
+         TextColor="{StaticResource Magenta}"
+         LineBreakMode="WordWrap"
+         HorizontalOptions="Center"
+         VerticalOptions="Start"
+         Margin="10,0,10,0"/>
+
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

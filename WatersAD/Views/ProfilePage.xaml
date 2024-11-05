@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:WatersAD.ViewModels"
+              x:DataType="viewModels:ProfileViewModel" 
+             x:Class="WatersAD.Views.ProfilePage"
+             
+             Title="ProfilePage">
+    <Grid RowDefinitions="Auto,*" RowSpacing="0">
+
+        <VerticalStackLayout Grid.Row="0"
+                       BackgroundColor="{StaticResource Secondary}"
+                       VerticalOptions="Start"
+                       Spacing="1"
+                       Padding="20">
+         
+            <ImageButton Source="{Binding ImagePath}"
+                           HeightRequest="200"
+                           WidthRequest="300"
+                           CornerRadius="125"
+                           Aspect="AspectFit"
+                           x:Name="ImgBtnProfile"
+                         Command="{Binding ChangeImageInCommand , Mode=TwoWay}"
+                         />
+
+    
+
+        </VerticalStackLayout>
+        <VerticalStackLayout Grid.Row="1"
+                       Margin="20"
+                       Spacing="20">
+
+            <Entry Placeholder="Nome Próprio"
+             FontSize="12"
+             x:Name="EntFirstName" 
+                   Text="{Binding FirstName, Mode=TwoWay}"/>
+
+            <Entry Placeholder="Apelido"
+             Keyboard="Email"
+             FontSize="12"
+             x:Name="EntLastName"
+                    Text="{Binding LastName, Mode=TwoWay}"/>
+    
+
+
+            <Button Text="Guardar"
+              FontSize="Small"
+              FontAttributes="Bold"
+              Command="{Binding ChangeDataInCommand}"
+             />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
