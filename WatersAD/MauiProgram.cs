@@ -34,11 +34,14 @@ namespace WatersAD
             builder.Services.AddTransient<TiersViewModel>();
             builder.Services.AddTransient<HomePageViewModel>();
             builder.Services.AddTransient<ProfileSettingsViewModel>();
+			builder.Services.AddTransient<RecoverPasswordViewModel>();
 			builder.Services.AddSingleton<INavigationService, NavigationService>();
 			builder.Services.AddTransient<ProfilePage>();
 
 			builder.Services.AddSingleton<AppShell>();
 			builder.Services.AddSingleton<LoginPage>();
+			builder.Services.AddSingleton<ChangePasswordPage>();
+			builder.Services.AddSingleton<ForgotPasswordPage>();
 			return builder.Build();
         }
     }

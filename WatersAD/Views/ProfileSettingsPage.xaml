@@ -34,26 +34,28 @@
                              Margin="20"
                              Spacing="20">
             <HorizontalStackLayout Spacing="10">
-                <Image Source="pedidos" HeightRequest="30" />
-                <Label Text="Os meus Pedidos"
-                       FontAttributes="Bold"
-                       FontSize="Small" />
+                <Image Source="edit" HeightRequest="20" />
+                <Label Text="Editar dados"
+            FontAttributes="Bold"
+            FontSize="Small" />
                 <HorizontalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer x:Name="TapOrders" />
+                    <TapGestureRecognizer  Command="{Binding NavigateToProfileCommand}" />
                 </HorizontalStackLayout.GestureRecognizers>
             </HorizontalStackLayout>
-
             <Border HeightRequest="1" BackgroundColor="Gray" />
-
             <HorizontalStackLayout Spacing="10">
-                <Image Source="services" HeightRequest="30" />
-                <Label Text="Minha Conta"
+                <Image Source="services" HeightRequest="20" />
+                <Label Text="Conta"
                        FontAttributes="Bold"
                        FontSize="Small" />
                 <HorizontalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer x:Name="MyAccount" Command="{Binding NavigateToProfileCommand}" />
+                    <TapGestureRecognizer Command="{Binding NavigateToChangePasswordCommand}" />
                 </HorizontalStackLayout.GestureRecognizers>
             </HorizontalStackLayout>
+
+          
+
+           
 
             <Border HeightRequest="1" BackgroundColor="Gray" />
 

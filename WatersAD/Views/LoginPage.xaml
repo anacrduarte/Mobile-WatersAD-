@@ -55,11 +55,11 @@
                                Spacing="2"
                                HorizontalOptions="Center"
                                VerticalOptions="EndAndExpand">
-            <Label Text="Não tem conta ? " />
-            <Label Text="Faça o registro agora" TextColor="{StaticResource Magenta }" FontAttributes="Bold">
+            <Label Text="Esqueceu a password? " TextColor="{StaticResource Magenta }" FontAttributes="Bold" >
+           
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer x:Name="TapRegister"
-                                         />
+                                 Command="{Binding ForgotPasswordCommand}"         />
                 </Label.GestureRecognizers>
             </Label>
         </HorizontalStackLayout>
