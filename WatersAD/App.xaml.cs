@@ -10,31 +10,27 @@ namespace WatersAD
     {
         private readonly IDataValidator _dataValidator;
         private readonly AuthService _authService;
-        private readonly ApiService _apiService;
+		private readonly INavigationService _navigationService;
+		private readonly ApiService _apiService;
 
-        public App(ApiService apiService, IDataValidator dataValidator,AuthService authService)
+        public App(ApiService apiService, IDataValidator dataValidator,AuthService authService, INavigationService navigationService)
         {
             InitializeComponent();
 
             
             _dataValidator = dataValidator;
             _authService = authService;
-            _apiService = apiService;
+			_navigationService = navigationService;
+			_apiService = apiService;
 
             SetMainPage();
         }
 
         private void SetMainPage()
         {
-            var accessToken = Preferences.Get("accesstoken", string.Empty);
+          
 
-            if (string.IsNullOrEmpty(accessToken))
-            {
-                MainPage = new NavigationPage(new LoginPage(new LoginViewModel(_apiService, _dataValidator, _authService)));
-                return;
-            }
-
-            MainPage = new AppShell(_apiService, _dataValidator, _authService);
+            MainPage = new AppShell(_apiService, _dataValidator, _authService, _navigationService);
         }
     }
 }

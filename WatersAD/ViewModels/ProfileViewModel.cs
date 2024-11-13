@@ -14,6 +14,7 @@ namespace WatersAD.ViewModels
 		private readonly AuthService _authService;
 		private readonly IDataValidator _dataValidator;
 		private readonly ApiService _apiService;
+		private readonly INavigationService _navigationService;
 		[ObservableProperty]
 		private string firstName = null!;
 
@@ -40,16 +41,13 @@ namespace WatersAD.ViewModels
 
 		public IAsyncRelayCommand ChangeImageInCommand { get; }
 
-		public ProfileViewModel(AuthService authService, IDataValidator dataValidator, ApiService apiService)
+		public ProfileViewModel(AuthService authService, IDataValidator dataValidator, ApiService apiService, INavigationService navigationService)
 		{
 
 			_authService = authService;
 			_dataValidator = dataValidator;
 			_apiService = apiService;
-
-
-
-			
+			_navigationService = navigationService;
 			ChangeImageInCommand = new AsyncRelayCommand(SelectImage);
             ChangeDataInCommand = new AsyncRelayCommand(ChangeData);
 
@@ -69,7 +67,7 @@ namespace WatersAD.ViewModels
             }
             else
             {
-                ImagePath = "Resources/Images/aaaa.jpg";
+                ImagePath = AppConfig.ProfileDefaultImage;
             }
 
         }
@@ -165,11 +163,11 @@ namespace WatersAD.ViewModels
                 }
             }
         }
-     
 
-        private void NavigateToLogin()
-		{
-			Application.Current!.MainPage = new NavigationPage(new LoginPage(new LoginViewModel(_apiService, _dataValidator, _authService)));
+
+        private async void NavigateToLogin()
+        {
+			await _navigationService.NavigateToAsync<LoginPage>();
 		}
-	}
+    }
 }

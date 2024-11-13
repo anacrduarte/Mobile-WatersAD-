@@ -12,7 +12,8 @@ namespace WatersAD.ViewModels
         private readonly ApiService _apiService;
         private readonly IDataValidator _validator;
         private readonly AuthService _authService;
-        [ObservableProperty]
+		private readonly INavigationService _navigationService;
+		[ObservableProperty]
         private string email = null!;
 
         [ObservableProperty]
@@ -28,12 +29,13 @@ namespace WatersAD.ViewModels
         public IAsyncRelayCommand SignInCommand { get; }
 
       
-        public LoginViewModel(ApiService apiService, IDataValidator dataValidator, AuthService authService)
+        public LoginViewModel(ApiService apiService, IDataValidator dataValidator, AuthService authService, INavigationService navigationService)
         {
             _apiService = apiService;
             _validator = dataValidator;
             _authService = authService;
-            SignInCommand = new AsyncRelayCommand(OnSignIn);
+			_navigationService = navigationService;
+			SignInCommand = new AsyncRelayCommand(OnSignIn);
         }
 
 
@@ -63,8 +65,8 @@ namespace WatersAD.ViewModels
             {
                 _authService.Login();
 
-                Application.Current!.MainPage = new AppShell(_apiService, _validator, _authService);
-                EmailErrorMessage = string.Empty;
+				await _navigationService.SetMainPageAsync<AppShell>();
+				EmailErrorMessage = string.Empty;
                 PasswordErrorMessage = string.Empty;
             }
             else

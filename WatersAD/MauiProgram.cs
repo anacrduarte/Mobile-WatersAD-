@@ -2,6 +2,7 @@
 using WatersAD.Services;
 using WatersAD.Validator;
 using WatersAD.ViewModels;
+using WatersAD.Views;
 
 namespace WatersAD
 {
@@ -32,7 +33,13 @@ namespace WatersAD
             builder.Services.AddTransient<ProfileViewModel>();
             builder.Services.AddTransient<TiersViewModel>();
             builder.Services.AddTransient<HomePageViewModel>();
-            return builder.Build();
+            builder.Services.AddTransient<ProfileSettingsViewModel>();
+			builder.Services.AddSingleton<INavigationService, NavigationService>();
+			builder.Services.AddTransient<ProfilePage>();
+
+			builder.Services.AddSingleton<AppShell>();
+			builder.Services.AddSingleton<LoginPage>();
+			return builder.Build();
         }
     }
 }

@@ -13,6 +13,16 @@ namespace WatersAD.Services
         
         public bool IsLoggedIn()
         {
+            var accessToken = Preferences.Get("accesstoken", string.Empty);
+
+            if (string.IsNullOrEmpty(accessToken))
+            {
+               _isLoggedIn = false ;
+            }
+            else
+            {
+                _isLoggedIn = true ;
+            }
             return _isLoggedIn;
         }
 

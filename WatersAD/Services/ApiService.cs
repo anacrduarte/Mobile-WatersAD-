@@ -230,5 +230,23 @@ namespace WatersAD.Services
             }
         }
 
+        public async Task<bool> LogoutAsync()
+        {
+            var response = await PostRequest("api/Users/logout", null);
+
+            if (response.IsSuccessStatusCode)
+            {
+             
+                return true;
+            }
+            else
+            {
+              
+                var errorMessage = await response.Content.ReadAsStringAsync();
+                _logger.LogError($"Logout falhou: {errorMessage}");
+                return false;
+            }
+        }
+
     }
 }

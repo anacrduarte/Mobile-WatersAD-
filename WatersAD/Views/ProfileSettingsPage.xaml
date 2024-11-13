@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WatersAD.Views.ProfileSettingsPage"
+             xmlns:viewModels="clr-namespace:WatersAD.ViewModels"
+              x:DataType="viewModels:ProfileSettingsViewModel" 
+             Title="ProfileSettingsPage">
+    <Grid RowDefinitions="Auto,5*,1*" RowSpacing="0">
+
+        <VerticalStackLayout Grid.Row="0"
+                             BackgroundColor="Cyan"
+                             VerticalOptions="Start"
+                             Spacing="1"
+                             Padding="20">
+
+            <ImageButton Source="{Binding ImagePath}"
+                         HeightRequest="120"
+                         WidthRequest="110"
+                         Aspect="AspectFill"
+                         CornerRadius="30"
+                         HorizontalOptions="Center" 
+                  
+                         />
+
+            <Label 
+                   HorizontalOptions="Center"
+                   TextColor="Black" 
+                Text="{Binding FullName}"/>
+
+        </VerticalStackLayout>
+
+
+        <VerticalStackLayout Grid.Row="1"
+                             Margin="20"
+                             Spacing="20">
+            <HorizontalStackLayout Spacing="10">
+                <Image Source="pedidos" HeightRequest="30" />
+                <Label Text="Os meus Pedidos"
+                       FontAttributes="Bold"
+                       FontSize="Small" />
+                <HorizontalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="TapOrders" />
+                </HorizontalStackLayout.GestureRecognizers>
+            </HorizontalStackLayout>
+
+            <Border HeightRequest="1" BackgroundColor="Gray" />
+
+            <HorizontalStackLayout Spacing="10">
+                <Image Source="services" HeightRequest="30" />
+                <Label Text="Minha Conta"
+                       FontAttributes="Bold"
+                       FontSize="Small" />
+                <HorizontalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="MyAccount" Command="{Binding NavigateToProfileCommand}" />
+                </HorizontalStackLayout.GestureRecognizers>
+            </HorizontalStackLayout>
+
+            <Border HeightRequest="1" BackgroundColor="Gray" />
+
+            <HorizontalStackLayout Spacing="10">
+                <Image Source="perguntas" HeightRequest="30" />
+                <Label Text="Perguntas Frequentes"
+                       FontAttributes="Bold"
+                       FontSize="Small" />
+                <HorizontalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer x:Name="Questions"  />
+                </HorizontalStackLayout.GestureRecognizers>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+
+        <ImageButton Grid.Row="2"
+                Source="logout.png"
+                HeightRequest="60"
+                WidthRequest="60"
+                Padding="5"
+                ToolTipProperties.Text="Logout"
+                HorizontalOptions="Center"
+                BackgroundColor="Transparent"
+                x:Name="BtnLogout"
+                      Command="{Binding LogoutCommand}" 
+                />
+    </Grid>
+
+</ContentPage>
