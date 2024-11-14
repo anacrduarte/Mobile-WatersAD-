@@ -280,5 +280,40 @@ namespace WatersAD.Services
 			}
 		}
 
+		public async Task<ApiResponse<bool>> ChangePassword(string email, string oldPassword, string newPassword, string confirm)
+		{
+			try
+			{
+				var model = new
+				{
+					email = email,
+					oldPassword = oldPassword,
+					newPassword = newPassword,
+					confirm = confirm,
+				};
+
+				var json = JsonSerializer.Serialize(model, _serializerOptions);
+				var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+				var response = await PostRequest("api/Users/changepassword", content);
+
+				if (!response.IsSuccessStatusCode)
+				{
+					_logger.LogError($"Erro ao enviar requisição HTTP : {response.StatusCode}");
+					return new ApiResponse<bool>
+					{
+						ErrorMessage = $"Erro ao enviar requisição HTTP : {response.StatusCode}"
+					};
+				}
+
+				return new ApiResponse<bool> { Data = true };
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError($"Erro no login : {ex.Message}");
+				return new ApiResponse<bool> { ErrorMessage = ex.Message };
+			}
+		}
+
 	}
 }

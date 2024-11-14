@@ -45,7 +45,7 @@
             <Border HeightRequest="1" BackgroundColor="Gray" />
             <HorizontalStackLayout Spacing="10">
                 <Image Source="services" HeightRequest="20" />
-                <Label Text="Conta"
+                <Label Text="Alterar palavra-passe"
                        FontAttributes="Bold"
                        FontSize="Small" />
                 <HorizontalStackLayout.GestureRecognizers>
@@ -60,12 +60,12 @@
             <Border HeightRequest="1" BackgroundColor="Gray" />
 
             <HorizontalStackLayout Spacing="10">
-                <Image Source="perguntas" HeightRequest="30" />
+                <Image Source="info" HeightRequest="20" />
                 <Label Text="Perguntas Frequentes"
                        FontAttributes="Bold"
                        FontSize="Small" />
                 <HorizontalStackLayout.GestureRecognizers>
-                    <TapGestureRecognizer x:Name="Questions"  />
+                    <TapGestureRecognizer Command="{Binding NavigateToQuestionsCommand}"   />
                 </HorizontalStackLayout.GestureRecognizers>
             </HorizontalStackLayout>
 

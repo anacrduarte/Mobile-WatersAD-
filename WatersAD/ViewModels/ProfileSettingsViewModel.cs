@@ -39,13 +39,18 @@ namespace WatersAD.ViewModels
 			LogoutCommand = new AsyncRelayCommand(ExecuteLogoutAsync);
 			NavigateToProfileCommand = new AsyncRelayCommand(async () => await NavigateToProfile());
 			NavigateToChangePasswordCommand = new AsyncRelayCommand(async () => await NavigateToChangePassword());
+			NavigateToQuestionsCommand = new AsyncRelayCommand(async () => await NavigateToQuestions());
 		}
+
+	
 
 		public IAsyncRelayCommand LogoutCommand { get; }
 
 		public IAsyncRelayCommand NavigateToProfileCommand { get; }
 
 		public IAsyncRelayCommand NavigateToChangePasswordCommand { get; }
+
+		public IAsyncRelayCommand NavigateToQuestionsCommand { get; }
 		public void Initialize()
 		{
 
@@ -112,6 +117,11 @@ namespace WatersAD.ViewModels
 		{
 
 			await _navigationService.NavigateToAsync<ChangePasswordPage>();
+		}
+
+		private async Task NavigateToQuestions()
+		{
+			await _navigationService.NavigateToAsync<QuestionsPage>();
 		}
 	}
 }

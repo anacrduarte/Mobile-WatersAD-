@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
 using WatersAD.Services;
 using WatersAD.Validator;
 using WatersAD.ViewModels;
@@ -13,7 +14,8 @@ namespace WatersAD
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
+				.UseMauiCommunityToolkit()
+				.ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
@@ -34,6 +36,7 @@ namespace WatersAD
             builder.Services.AddTransient<TiersViewModel>();
             builder.Services.AddTransient<HomePageViewModel>();
             builder.Services.AddTransient<ProfileSettingsViewModel>();
+			builder.Services.AddTransient<ChangePasswordViewModel>();
 			builder.Services.AddTransient<RecoverPasswordViewModel>();
 			builder.Services.AddSingleton<INavigationService, NavigationService>();
 			builder.Services.AddTransient<ProfilePage>();
@@ -42,6 +45,8 @@ namespace WatersAD
 			builder.Services.AddSingleton<LoginPage>();
 			builder.Services.AddSingleton<ChangePasswordPage>();
 			builder.Services.AddSingleton<ForgotPasswordPage>();
+			builder.Services.AddSingleton<ProfileSettingsPage>();
+			builder.Services.AddSingleton<QuestionsPage>();
 			return builder.Build();
         }
     }
