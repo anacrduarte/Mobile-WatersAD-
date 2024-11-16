@@ -27,7 +27,7 @@ namespace WatersAD
         {
             var homePage = new HomePage();
             var servicePage = new ServicePriceListPage(new TiersViewModel(_apiService));
-            var requestPage = new RequestWaterMeterPage();
+            var requestPage = new RequestWaterMeterPage(new RequestWaterMeterViewModel(_apiService, _navigationService));
             var perfilPage = new ProfileSettingsPage(new ProfileSettingsViewModel(_authService, _apiService, _validator, _navigationService));
             var loginPage = new LoginPage(new LoginViewModel(_apiService, _validator, _authService, _navigationService));
 

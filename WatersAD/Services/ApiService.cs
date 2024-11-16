@@ -206,13 +206,70 @@ namespace WatersAD.Services
 			}
 		}
 
-        public async Task<(List<Tiers>? Tiers, string? ErrorMessage)> GetTiers()
+		public async Task<(bool Success, string? ErrorMessage)> AddRequest(RequestModel request)
+		{
+			try
+			{
+
+				var jsonContent = JsonSerializer.Serialize(request);
+				var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+
+				var response = await PostRequest("api/Request/RequestWaterMeter", content);
+
+				if (response.IsSuccessStatusCode)
+				{
+					return (true, null);
+				}
+				else
+				{
+
+					if (response.StatusCode == HttpStatusCode.Unauthorized)
+					{
+						const string errorMessage = "Unauthorized";
+						_logger.LogWarning(errorMessage);
+						return (false, errorMessage);
+					}
+
+
+					string generalErrorMessage = $"Erro na requisição: {response.ReasonPhrase}";
+					_logger.LogError(generalErrorMessage);
+					return (false, generalErrorMessage);
+				}
+			}
+			catch (HttpRequestException ex)
+			{
+
+				string errorMessage = $"Erro de requisição HTTP: {ex.Message}";
+				_logger.LogError(ex, errorMessage);
+				return (false, errorMessage);
+			}
+			catch (Exception ex)
+			{
+
+				string errorMessage = $"Erro inesperado: {ex.Message}";
+				_logger.LogError(ex, errorMessage);
+				return (false, errorMessage);
+			}
+		}
+
+		public async Task<(List<Tiers>? Tiers, string? ErrorMessage)> GetTiers()
         {
             return await GetAsync<List<Tiers>>("api/TierPrice/GetAllTiers");
         }
-
-
-        public async Task<HttpResponseMessage> PutRequestImageAsync(string uri, MultipartFormDataContent content)
+		public async Task<(IEnumerable<Country>? Countries, string? ErrorMessage)> GetCountries()
+		{
+			return await GetAsync<IEnumerable<Country>>("api/CountryCity/GetAllCountry");
+		}
+		public async Task<(IEnumerable<City>? Cities, string? ErrorMessage)> GetCities(int countryId)
+		{
+			return await GetAsync<IEnumerable<City>>($"api/CountryCity/GetCitiesByCountryId/{countryId}");
+		}
+		public async Task<(IEnumerable<Locality>? Localities, string? ErrorMessage)> GetLocalities(int cityId)
+		{
+			return await GetAsync<IEnumerable<Locality>>($"api/CountryCity/GetLocalityByCityId/{cityId}");
+		}
+		public async Task<HttpResponseMessage> PutRequestImageAsync(string uri, MultipartFormDataContent content)
         {
             var urlAddress = AppConfig.BaseUrl + uri;
             try

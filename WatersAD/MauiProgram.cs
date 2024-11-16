@@ -40,6 +40,7 @@ namespace WatersAD
 			builder.Services.AddTransient<RecoverPasswordViewModel>();
 			builder.Services.AddSingleton<INavigationService, NavigationService>();
 			builder.Services.AddTransient<ProfilePage>();
+			builder.Services.AddTransient<RequestWaterMeterViewModel>();
 
 			builder.Services.AddSingleton<AppShell>();
 			builder.Services.AddSingleton<LoginPage>();
