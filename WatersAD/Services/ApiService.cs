@@ -163,11 +163,7 @@ namespace WatersAD.Services
 		{
 			try
 			{
-				
-				//var jsonContent = JsonSerializer.Serialize(userData);
-				//var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-				
 				var response = await PutRequestImageAsync("api/Users/changeuser", content);
 
 				if (response.IsSuccessStatusCode)
@@ -268,6 +264,16 @@ namespace WatersAD.Services
 		public async Task<(IEnumerable<Locality>? Localities, string? ErrorMessage)> GetLocalities(int cityId)
 		{
 			return await GetAsync<IEnumerable<Locality>>($"api/CountryCity/GetLocalityByCityId/{cityId}");
+		}
+
+		public async Task<(IEnumerable<Consumption>? Consumptions, string? ErrorMessage)> GetConsumptionsAndInvoices(string email)
+		{
+			return await GetAsync<IEnumerable<Consumption>>($"api/ConsumptionInfo/GetAllInvoices/{email}");
+		}
+
+		public async Task<(InvoiceDetails? InvoiceDetails, string? ErrorMessage)> GetInvoiceDetais(int id)
+		{
+			return await GetAsync<InvoiceDetails>($"api/InvoicesHistory/details/{id}");
 		}
 		public async Task<HttpResponseMessage> PutRequestImageAsync(string uri, MultipartFormDataContent content)
         {

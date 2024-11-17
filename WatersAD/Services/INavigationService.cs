@@ -11,5 +11,9 @@ namespace WatersAD.Services
 		Task NavigateToAsync<TPage>() where TPage : Page;
 
 		Task SetMainPageAsync<TPage>() where TPage : Page;
+
+		Task NavigateToAsync<TPage>(Dictionary<string, object> parameters = null) where TPage : Page;
+
+	
 	}
 }

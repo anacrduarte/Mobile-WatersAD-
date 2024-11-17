@@ -41,6 +41,8 @@ namespace WatersAD
 			builder.Services.AddSingleton<INavigationService, NavigationService>();
 			builder.Services.AddTransient<ProfilePage>();
 			builder.Services.AddTransient<RequestWaterMeterViewModel>();
+			builder.Services.AddTransient<ConsumptionInvoiceViewModel>();
+			builder.Services.AddTransient<InvoiceDetailsViewModel>();
 
 			builder.Services.AddSingleton<AppShell>();
 			builder.Services.AddSingleton<LoginPage>();
@@ -48,6 +50,7 @@ namespace WatersAD
 			builder.Services.AddSingleton<ForgotPasswordPage>();
 			builder.Services.AddSingleton<ProfileSettingsPage>();
 			builder.Services.AddSingleton<QuestionsPage>();
+			builder.Services.AddSingleton<InvoiceDetailsPage>();
 			return builder.Build();
         }
     }

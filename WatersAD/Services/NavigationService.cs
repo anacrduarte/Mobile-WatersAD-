@@ -28,5 +28,26 @@ namespace WatersAD.Services
 			Application.Current!.MainPage = new NavigationPage(page); 
 			return Task.CompletedTask;
 		}
+
+		public async Task NavigateToAsync<TPage>(Dictionary<string, object> parameters = null) where TPage : Page
+		{
+			
+			var page = _serviceProvider.GetRequiredService<TPage>();
+
+		
+			if (parameters != null)
+			{
+				
+				page.BindingContext = parameters;
+			}
+
+		
+			await Application.Current!.MainPage!.Navigation.PushAsync(page);
+		}
+
+
+
+
+
 	}
 }

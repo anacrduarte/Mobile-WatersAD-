@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WatersAD.Views.ConsumptionsAndInvoicesPage"
+              xmlns:viewModels="clr-namespace:WatersAD.ViewModels"
+               x:DataType="viewModels:ConsumptionInvoiceViewModel" 
+             xmlns:models="clr-namespace:WatersAD.Models"
+             Title="ConsumptionsAndInvoicesPage">
+
+    <StackLayout Padding="10">
+  
+        <ScrollView>
+            <CollectionView ItemsSource="{Binding Consumptions}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Consumption">
+                     
+                        <StackLayout Padding="10" Margin="0,0,0,10" BackgroundColor="#f9f9f9">
+                            <Label Text="Consumo:" FontAttributes="Bold" />
+                            <Label Text="{Binding consumptionValue}" />
+
+                            <Label Text="Data de Consumo:" FontAttributes="Bold" />
+                            <Label Text="{Binding consumptionDate, StringFormat='{0:dd/MM/yyyy}'}" />
+
+                            <Label Text="Endereço:" FontAttributes="Bold" />
+                            <Label Text="{Binding waterMeter.fullAdress}" />
+
+                            <Label Text="Fatura:" FontAttributes="Bold" />
+                            <Label Text="{Binding invoice.totalAmount, StringFormat='R$ {0:F2}'}" />
+
+                         
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ConsumptionInvoiceViewModel}}, Path=DetailsDataCommand}"
+                                     CommandParameter="{Binding invoice.id}" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>

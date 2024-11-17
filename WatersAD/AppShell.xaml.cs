@@ -30,6 +30,7 @@ namespace WatersAD
             var requestPage = new RequestWaterMeterPage(new RequestWaterMeterViewModel(_apiService, _navigationService));
             var perfilPage = new ProfileSettingsPage(new ProfileSettingsViewModel(_authService, _apiService, _validator, _navigationService));
             var loginPage = new LoginPage(new LoginViewModel(_apiService, _validator, _authService, _navigationService));
+            var invoicesPage = new ConsumptionsAndInvoicesPage(new ConsumptionInvoiceViewModel(_apiService, _navigationService));
 
             bool isUserLoggedIn = _authService.IsLoggedIn();
 
@@ -41,8 +42,8 @@ namespace WatersAD
                     {
                         new ShellContent {Title = "Home", Icon="home",Content = homePage  },
                         new ShellContent { Title = "Preços", Icon="pricelist",Content = servicePage },
-                        new ShellContent { Title = "Favoritos",Icon="watertap",Content = requestPage },
-                        new ShellContent { Title = "Perfil", Icon="account", Content = perfilPage }
+                        new ShellContent { Title = "Faturas",Icon="watertap",Content = invoicesPage },
+                        new ShellContent { Title = "Conta", Icon="account", Content = perfilPage }
                      }
                 });
             }
