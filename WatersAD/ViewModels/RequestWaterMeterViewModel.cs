@@ -1,122 +1,114 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Org.Apache.Http.Protocol;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WatersAD.Models;
 using WatersAD.Services;
 
 namespace WatersAD.ViewModels
 {
-    public partial class RequestWaterMeterViewModel : ObservableObject
+	public partial class RequestWaterMeterViewModel : ObservableValidator
 	{
 		private readonly ApiService _apiService;
 		private readonly INavigationService _navigationService;
 
+		
 		[ObservableProperty]
-		private string firstName;
-
-		[ObservableProperty]
-		private string lastName;
-
-		[ObservableProperty]
-		private string address;
+		[Required]
+		private string firstName = null!;
 
 		[ObservableProperty]
-		private string email;
-
-
-		[ObservableProperty]
-		private string nif;
+		[Required]
+		private string lastName = null!;
 
 		[ObservableProperty]
-		private string phoneNumber;
+		[Required]
+		private string address = null!;
 
 		[ObservableProperty]
-		private string houseNumber;
+		[Required]
+		private string email = null!;
 
 		[ObservableProperty]
-		private string postalCode;
+		[Required]
+		private string nif = null!;
 
 		[ObservableProperty]
-		private string remainPostalCode;
+		[Required]
+		private string phoneNumber = null!;
 
 		[ObservableProperty]
-		private Locality locality;
-
-		//[ObservableProperty]
-		//private int cityId;
-
-		//[ObservableProperty]
-		//private int countryId;
+		[Required]
+		private string houseNumber = null!;
 
 		[ObservableProperty]
-		private ObservableCollection<Locality> localities;
+		[Required]
+		private string postalCode = null!;
 
 		[ObservableProperty]
-		private ObservableCollection<Country> countries;
+		[Required]
+		private string remainPostalCode = null!;
 
 		[ObservableProperty]
-		private ObservableCollection<City> cities;
+		private Locality locality = null!;
 
 		[ObservableProperty]
-		private Country selectedCountry;
+		private ObservableCollection<Locality> localities = null!;
 
 		[ObservableProperty]
-		private City selectedCity;
+		private ObservableCollection<Country> countries = null!;
 
 		[ObservableProperty]
-		private string addressWaterMeter;
+		private ObservableCollection<City> cities = null!;
 
 		[ObservableProperty]
-		private string houseNumberWaterMeter;
+		private Country selectedCountry = null!;
 
 		[ObservableProperty]
-		private string postalCodeWaterMeter;
+		private City selectedCity = null!;
 
 		[ObservableProperty]
-		private string remainPostalCodeWaterMeter;
+		[Required]
+		private string addressWaterMeter = null!;
 
 		[ObservableProperty]
-		private int localityWaterMeterId;
-
-		//[ObservableProperty]
-		//private int cityWaterMeterId;
-
-		//[ObservableProperty]
-		//private int countryWaterMeterId;
+		[Required]
+		private string houseNumberWaterMeter = null!;
 
 		[ObservableProperty]
-		private Locality localityWM;
+		[Required]
+		private string postalCodeWaterMeter = null!;
 
 		[ObservableProperty]
-		private City cityWM;
+		[Required]
+		private string remainPostalCodeWaterMeter = null!;
 
 		[ObservableProperty]
-		private ObservableCollection<Locality> localitiesWM;
+		private Locality localityWM = null!;
 
 		[ObservableProperty]
-		private ObservableCollection<Country> countriesWM;
+		private City cityWM = null!;
 
 		[ObservableProperty]
-		private ObservableCollection<City> citiesWM;
+		private ObservableCollection<Locality> localitiesWM = null!;
 
 		[ObservableProperty]
-		private Country selectedCountryWM;
+		private ObservableCollection<Country> countriesWM = null!;
 
 		[ObservableProperty]
-		private City selectedCityWM;
+		private ObservableCollection<City> citiesWM = null!;
+
+		[ObservableProperty]
+		private Country selectedCountryWM = null!;
+
+		[ObservableProperty]
+		private City selectedCityWM = null!;
 
 		public IAsyncRelayCommand SendRequestCommand { get; }
 		public RequestWaterMeterViewModel(ApiService apiService, INavigationService navigationService)
-        {
-            _apiService = apiService;
-            _navigationService = navigationService;
+		{
+			_apiService = apiService;
+			_navigationService = navigationService;
 
 			SendRequestCommand = new AsyncRelayCommand(SendRequestAsync);
 		}
@@ -127,9 +119,9 @@ namespace WatersAD.ViewModels
 			{
 				var response = await _apiService.GetCountries();
 
-				Countries = new ObservableCollection<Country>(response.Countries);
+				Countries = new ObservableCollection<Country>(response.Countries!);
 
-				CountriesWM = new ObservableCollection<Country>(response.Countries);
+				CountriesWM = new ObservableCollection<Country>(response.Countries!);
 			}
 			catch (Exception)
 			{
@@ -140,7 +132,7 @@ namespace WatersAD.ViewModels
 		}
 		partial void OnSelectedCountryChanged(Country value)
 		{
-			
+
 			OnCountrySelected();
 		}
 
@@ -167,15 +159,15 @@ namespace WatersAD.ViewModels
 			{
 				var response = await _apiService.GetCities(SelectedCountry.Id);
 
-				Cities = new ObservableCollection<City>(response.Cities);
+				Cities = new ObservableCollection<City>(response.Cities!);
 
-				
+
 			}
-			if(SelectedCountryWM != null)
+			if (SelectedCountryWM != null)
 			{
-				var response = await _apiService.GetCities(SelectedCountry.Id);
+				var response = await _apiService.GetCities(SelectedCountry!.Id);
 
-				CitiesWM = new ObservableCollection<City>(response.Cities);
+				CitiesWM = new ObservableCollection<City>(response.Cities!);
 			}
 		}
 
@@ -185,21 +177,29 @@ namespace WatersAD.ViewModels
 			if (SelectedCity != null)
 			{
 				var response = await _apiService.GetLocalities(SelectedCity.Id);
-				Localities = new ObservableCollection<Locality>(response.Localities);
+				Localities = new ObservableCollection<Locality>(response.Localities!);
 			}
 
 			if (SelectedCityWM != null)
 			{
-				var response = await _apiService.GetLocalities(SelectedCity.Id);
-				LocalitiesWM = new ObservableCollection<Locality>(response.Localities);
+				var response = await _apiService.GetLocalities(SelectedCity!.Id);
+				LocalitiesWM = new ObservableCollection<Locality>(response.Localities!);
 			}
 		}
 
 		public async Task SendRequestAsync()
 		{
+			string validationMessage = ValidateFields();
+
+			if (!string.IsNullOrEmpty(validationMessage))
+			{
+
+				await Application.Current!.MainPage!.DisplayAlert("Erro", validationMessage, "OK");
+				return;
+			}
 			try
 			{
-				
+
 				var request = new RequestModel
 				{
 					FirstName = FirstName,
@@ -223,7 +223,7 @@ namespace WatersAD.ViewModels
 					CountryWaterMeterId = SelectedCountryWM.Id
 				};
 
-				
+
 				var response = await _apiService.AddRequest(request);
 
 				if (response.Success)
@@ -244,6 +244,61 @@ namespace WatersAD.ViewModels
 				await Application.Current!.MainPage!.DisplayAlert("Erro", $"Erro {ex.Message}", "OK");
 				await _navigationService.SetMainPageAsync<AppShell>();
 			}
+		}
+
+		public string ValidateFields()
+		{
+			var errors = new List<string>();
+
+			
+			if (string.IsNullOrWhiteSpace(FirstName))
+				errors.Add("O campo 'Primeiro Nome' é obrigatório.");
+
+			if (string.IsNullOrWhiteSpace(LastName))
+				errors.Add("O campo 'Último Nome' é obrigatório.");
+
+			if (string.IsNullOrWhiteSpace(Address))
+				errors.Add("O campo 'Endereço' é obrigatório.");
+
+			if (string.IsNullOrWhiteSpace(Email))
+				errors.Add("O campo 'Email' é obrigatório.");
+
+			if (string.IsNullOrWhiteSpace(Nif))
+				errors.Add("O campo 'NIF' é obrigatório.");
+
+			if (string.IsNullOrWhiteSpace(PhoneNumber))
+				errors.Add("O campo 'Número de Telefone' é obrigatório.");
+
+			if (string.IsNullOrWhiteSpace(HouseNumber))
+				errors.Add("O campo 'Número da Casa' é obrigatório.");
+
+			if (string.IsNullOrWhiteSpace(PostalCode))
+				errors.Add("O campo 'Código Postal' é obrigatório.");
+
+			if (string.IsNullOrWhiteSpace(RemainPostalCode))
+				errors.Add("O campo 'Complemento do Código Postal' é obrigatório.");
+
+			if (string.IsNullOrWhiteSpace(AddressWaterMeter))
+				errors.Add("O campo 'Morada do Contador' é obrigatório.");
+
+			if (string.IsNullOrWhiteSpace(HouseNumberWaterMeter))
+				errors.Add("O campo 'Número da Casa do Contador' é obrigatório.");
+
+			if (string.IsNullOrWhiteSpace(PostalCodeWaterMeter))
+				errors.Add("O campo 'Código Postal do Contador' é obrigatório.");
+
+			if (string.IsNullOrWhiteSpace(RemainPostalCodeWaterMeter))
+				errors.Add("O campo 'Complemento do Código Postal do Contador' é obrigatório.");
+
+			if (LocalityWM.Id <= 0)
+				errors.Add("O campo 'Localidade do Contador' é obrigatório.");
+
+			if (errors.Any())
+			{
+				return string.Join("\n", errors);
+			}
+
+			return string.Empty;
 		}
 	}
 }

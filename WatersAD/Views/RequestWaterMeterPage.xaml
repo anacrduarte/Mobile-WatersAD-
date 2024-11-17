@@ -7,13 +7,13 @@
              Title="RequestWaterMeterPage"         BackgroundColor="#2D2D2D">
     <ScrollView>
         <StackLayout Padding="20" Spacing="15">
-            <!-- Título -->
+          
             <Label Text="Pedido de Contador" 
                FontSize="24" 
                TextColor="White" 
                HorizontalOptions="Center" />
 
-            <!-- Dados Pessoais -->
+       
             <Label Text="Dados Pessoais" 
                FontSize="18" 
                TextColor="White" 
@@ -31,7 +31,6 @@
                 <Entry Placeholder="Código-Postal" Text="{Binding PostalCode}" Keyboard="Numeric" BackgroundColor="White" />
                 <Entry Placeholder="Extensão Código Postal" Text="{Binding RemainPostalCode}" Keyboard="Numeric" BackgroundColor="White" />
 
-                <!-- País, Cidade e Localidade -->
                 <Picker Title="País" 
             ItemsSource="{Binding Countries}" 
             ItemDisplayBinding="{Binding Name}" 
@@ -46,7 +45,7 @@
             SelectedItem="{Binding Locality, Mode=TwoWay}" />
           
 
-            <!-- Dados do Contador -->
+       
             <Label Text="Dados do Contador" 
                FontSize="18" 
                TextColor="White" 
@@ -70,7 +69,7 @@
             SelectedItem="{Binding LocalityWM, Mode=TwoWay}" />
        
 
-            <!-- Botão de Submissão -->
+      
             <Button Text="Submeter Pedido" 
                 BackgroundColor="#007BFF" 
                 TextColor="White" 
