@@ -168,7 +168,15 @@ namespace WatersAD.Services
 
 				if (response.IsSuccessStatusCode)
 				{
-					return (true, null);
+                    var responseString = await response.Content.ReadAsStringAsync();
+                    var data = JsonSerializer.Deserialize<UserResponse>(responseString, _serializerOptions);
+                    if (data != null)
+                    {
+                        Preferences.Set("firstname", data.FirstName);
+                    Preferences.Set("lastname", data.LastName);
+                    Preferences.Set("imageurl", data.ImageUrl);
+                    }
+                    return (true, null);
 				}
 				else
 				{
@@ -248,8 +256,54 @@ namespace WatersAD.Services
 				return (false, errorMessage);
 			}
 		}
+        public async Task<(bool Success, string? ErrorMessage)> AddConsumption(AddConsumption request)
+        {
+            try
+            {
 
-		public async Task<(List<Tiers>? Tiers, string? ErrorMessage)> GetTiers()
+                var jsonContent = JsonSerializer.Serialize(request);
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+
+                var response = await PostRequest("api/ConsumptionInfo/CreateConsumption", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return (true, null);
+                }
+                else
+                {
+
+                    if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        const string errorMessage = "Unauthorized";
+                        _logger.LogWarning(errorMessage);
+                        return (false, errorMessage);
+                    }
+
+
+                    string generalErrorMessage = $"Erro na requisição: {response.ReasonPhrase}";
+                    _logger.LogError(generalErrorMessage);
+                    return (false, generalErrorMessage);
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+
+                string errorMessage = $"Erro de requisição HTTP: {ex.Message}";
+                _logger.LogError(ex, errorMessage);
+                return (false, errorMessage);
+            }
+            catch (Exception ex)
+            {
+
+                string errorMessage = $"Erro inesperado: {ex.Message}";
+                _logger.LogError(ex, errorMessage);
+                return (false, errorMessage);
+            }
+        }
+
+        public async Task<(List<Tiers>? Tiers, string? ErrorMessage)> GetTiers()
         {
             return await GetAsync<List<Tiers>>("api/TierPrice/GetAllTiers");
         }
@@ -275,6 +329,18 @@ namespace WatersAD.Services
 		{
 			return await GetAsync<InvoiceDetails>($"api/InvoicesHistory/details/{id}");
 		}
+
+        public async Task<(DateTime? Date, string? ErrorMessage)> GetLastDate(int id)
+        {
+            return await GetAsync<DateTime>($"api/InvoicesHistory/date/{id}");
+        }
+
+        public async Task<(IEnumerable<WaterMeter>? WaterMeters, string? ErrorMessage)> GetWaterMeters(string email)
+		{
+			return await GetAsync<IEnumerable<WaterMeter>>($"api/ConsumptionInfo/GetWaterMetersClient/{email}");
+		}
+
+
 		public async Task<HttpResponseMessage> PutRequestImageAsync(string uri, MultipartFormDataContent content)
         {
             var urlAddress = AppConfig.BaseUrl + uri;
@@ -347,18 +413,18 @@ namespace WatersAD.Services
 		{
 			try
 			{
-				var model = new
+				var model = new ChangePasswordModel
 				{
-					email = email,
-					oldPassword = oldPassword,
-					newPassword = newPassword,
-					confirm = confirm,
+					Email = email,
+					OldPassword = oldPassword,
+					NewPassword = newPassword,
+					Confirm = confirm,
 				};
 
 				var json = JsonSerializer.Serialize(model, _serializerOptions);
 				var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-				var response = await PostRequest("api/Users/changepassword", content);
+				var response = await PostRequest("api/Users/ChangePassword", content);
 
 				if (!response.IsSuccessStatusCode)
 				{

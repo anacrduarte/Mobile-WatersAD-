@@ -3,103 +3,104 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="WatersAD.Views.QuestionsPage"
-             Title="QuestionsPage">
+             Title="Perguntas">
     <ScrollView>
         <VerticalStackLayout Padding="10" Spacing="15">
             <Label Text="Perguntas Frequentes"
-                   FontSize="Medium"
-                   TextColor="DarkBlue"
+                   FontSize="25"
+                   TextColor="{StaticResource Secondary}"
                    FontAttributes="Bold"
-                   HorizontalOptions="Center" />
+                   HorizontalOptions="Center"
+                   Margin="10"/>
 
             <toolkit:Expander>
                 <toolkit:Expander.Header>
                     <Label Text="Como a empresa garante a qualidade da água fornecida?"
-                           FontSize="15"
+                           FontSize="16"
                            FontAttributes="Bold" />
                 </toolkit:Expander.Header>
                 <toolkit:Expander.Content>
                     <Label Text="A empresa realiza testes regulares da água em diversos pontos de distribuição para garantir que ela atenda aos padrões de potabilidade exigidos pelas autoridades de saúde. Os testes incluem a verificação de parâmetros como pH, cloro residual, turbidez, bactérias e outros contaminantes. Além disso, a empresa segue os protocolos e normas estabelecidas pelos órgãos reguladores nacionais e internacionais para garantir a segurança e a qualidade da água."
-                           TextColor="DarkBlue"
-                           FontSize="12" />
+                         TextColor="Black"
+                           FontSize="14" />
                 </toolkit:Expander.Content>
             </toolkit:Expander>
 
             <toolkit:Expander>
                 <toolkit:Expander.Header>
                     <Label Text="O que devo fazer se notar um problema de cor ou sabor na água?"
-                           FontSize="15"
+                           FontSize="16"
                            FontAttributes="Bold" />
                 </toolkit:Expander.Header>
                 <toolkit:Expander.Content>
                     <Label Text="Se você perceber alguma alteração no sabor, cor ou cheiro da água, entre em contato imediatamente com o serviço de atendimento ao cliente da empresa para que a situação possa ser investigada. A empresa realizará a análise da água para identificar qualquer possível problema e tomará as providências necessárias para corrigi-lo, além de informar os consumidores sobre o ocorrido."
-                           TextColor="DarkBlue"
-                           FontSize="12" />
+                            TextColor="Black"
+                           FontSize="14" />
                 </toolkit:Expander.Content>
             </toolkit:Expander>
 
             <toolkit:Expander>
                 <toolkit:Expander.Header>
                     <Label Text="Qual é o processo para realizar a instalação de um novo ponto de água ou ligação à rede?"
-                           FontSize="15"
+                           FontSize="16"
                            FontAttributes="Bold" />
                 </toolkit:Expander.Header>
                 <toolkit:Expander.Content>
                     <Label Text="Para solicitar uma nova ligação, o cliente deve entrar em contato com a empresa, fornecendo os dados do local e detalhes necessários, como a documentação de propriedade ou contrato de aluguel. A empresa realizará uma vistoria no local para determinar a viabilidade da ligação e, se aprovado, iniciará o processo de instalação, que pode envolver a escavação e a instalação de tubos e medidores de consumo. O prazo para conclusão pode variar dependendo da localização e da complexidade do trabalho."
-                           TextColor="DarkBlue"
-                           FontSize="12" />
+                            TextColor="Black"
+                           FontSize="14" />
                 </toolkit:Expander.Content>
             </toolkit:Expander>
 
             <toolkit:Expander>
                 <toolkit:Expander.Header>
                     <Label Text="Como a empresa lida com cortes no fornecimento de água por falta de pagamento?"
-                           FontSize="15"
+                           FontSize="16"
                            FontAttributes="Bold" />
                 </toolkit:Expander.Header>
                 <toolkit:Expander.Content>
                     <Label Text="Se o pagamento não for realizado dentro do prazo estipulado, a empresa pode suspender o fornecimento de água após um aviso prévio. No entanto, o cliente terá a oportunidade de regularizar a situação, podendo solicitar um parcelamento da dívida ou obter mais informações sobre alternativas para evitar o corte. A empresa se compromete a informar o cliente adequadamente antes de qualquer ação de corte e oferece meios para resolver o problema de forma amigável."
-                            TextColor="DarkBlue"
-                           FontSize="12" />
+                            TextColor="Black"
+                           FontSize="14" />
                 </toolkit:Expander.Content>
             </toolkit:Expander>
 
             <toolkit:Expander>
                 <toolkit:Expander.Header>
                     <Label Text="Qual é o impacto do uso excessivo de água no custo da fatura?"
-                           FontSize="15"
+                           FontSize="16"
                            FontAttributes="Bold" />
                 </toolkit:Expander.Header>
                 <toolkit:Expander.Content>
                     <Label Text="O uso excessivo de água impacta diretamente o custo da fatura, uma vez que o valor é calculado com base no volume consumido. A empresa utiliza um sistema de tarifas progressivas, ou seja, quanto maior o consumo, maior será a tarifa aplicada para volumes mais elevados. A empresa recomenda o uso consciente da água, incentivando os clientes a adotar práticas que reduzam o desperdício e, assim, contribuam para um custo mais baixo na fatura."
-                           TextColor="DarkBlue"
-                           FontSize="12" />
+                            TextColor="Black"
+                           FontSize="14" />
                 </toolkit:Expander.Content>
             </toolkit:Expander>
 
             <toolkit:Expander>
                 <toolkit:Expander.Header>
                     <Label Text="Como a empresa gerencia o fornecimento de água em períodos de seca?"
-                           FontSize="15"
+                           FontSize="16"
                            FontAttributes="Bold" />
                 </toolkit:Expander.Header>
                 <toolkit:Expander.Content>
                     <Label Text="Durante períodos de seca ou baixa disponibilidade de água, a empresa adota medidas de racionamento ou ajustes na distribuição, priorizando o fornecimento para áreas essenciais, como hospitais e serviços públicos. Além disso, é comum a implementação de campanhas de conscientização sobre o uso responsável da água, incentivando a população a reduzir o consumo e a evitar desperdícios. A empresa também pode buscar fontes alternativas de água ou colaborar com outras instituições para garantir a continuidade do abastecimento."
-                           TextColor="DarkBlue"
-                           FontSize="12" />
+                        TextColor="Black"
+                           FontSize="14" />
                 </toolkit:Expander.Content>
             </toolkit:Expander>
 
             <toolkit:Expander>
                 <toolkit:Expander.Header>
                     <Label Text="O que fazer se houver vazamento de água na rua ou em redes públicas?"
-                           FontSize="15"
+                           FontSize="16"
                            FontAttributes="Bold" />
                 </toolkit:Expander.Header>
                 <toolkit:Expander.Content>
                     <Label Text="Caso você observe um vazamento de água na rua ou em redes públicas, deve comunicar imediatamente a empresa através dos canais de atendimento ao cliente (telefone, site ou aplicativo). A equipe técnica será acionada para identificar e corrigir o vazamento o mais rápido possível, evitando desperdício de água e danos à infraestrutura. A empresa realiza manutenções periódicas para garantir que a rede de distribuição esteja em bom estado, mas a colaboração da comunidade é essencial para detectar problemas rapidamente."
-                           TextColor="DarkBlue"
-                           FontSize="12" />
+                           TextColor="Black"
+                           FontSize="14" />
                 </toolkit:Expander.Content>
             </toolkit:Expander>
         </VerticalStackLayout>

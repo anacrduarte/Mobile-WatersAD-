@@ -8,9 +8,10 @@ namespace WatersAD.Models
 {
 	public class WaterMeterService
 	{
-		public int id { get; set; }
-		public string serialNumber { get; set; }
-		public int quantity { get; set; }
-		public bool available { get; set; }
+		public int Id { get; set; }
+		public string SerialNumber { get; set; } = null!;
+		public int Quantity { get; set; }
+		public bool Available { get; set; }
+
 	}
 }

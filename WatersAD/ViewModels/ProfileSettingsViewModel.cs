@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using WatersAD.Config;
 using WatersAD.Services;
@@ -60,7 +61,7 @@ namespace WatersAD.ViewModels
 
 			FullName = $"{FirstName} {LastName}";
 
-			if (!string.IsNullOrEmpty(ImageUrl))
+			if (!string.IsNullOrEmpty(ImageUrl) && !ImageUrl.Contains("noimage.png"))
 			{
 				ImagePath = $"{AppConfig.BaseUrl.TrimEnd('/')}/{ImageUrl.TrimStart('~', '/')}";
 			}
@@ -86,16 +87,18 @@ namespace WatersAD.ViewModels
 					Preferences.Set("lastname", string.Empty);
 					Preferences.Set("imageurl", string.Empty);
 
+					//await NavigateToHome();
+
+                    await ReconfigureShellAsync();
+
+                    //await _navigationService.SetMainPageAsync<AppShell>();
 
 
-					await _navigationService.SetMainPageAsync<AppShell>();
-
-
-				}
+                }
 				else
 				{
-					ErrorMessage = "Failed to upload data";
-				}
+                    await Application.Current!.MainPage!.DisplayAlert("Erro", $"Erro a receber os dados", "OK");
+                }
 
 
 
@@ -103,11 +106,16 @@ namespace WatersAD.ViewModels
 			catch (Exception ex)
 			{
 
-				Debug.WriteLine($"Logout failed: {ex.Message}");
+				await Application.Current!.MainPage!.DisplayAlert("Erro", $"Erro {ex.Message}", "OK");
 			}
 		}
 
-		private async Task NavigateToProfile()
+        private async Task NavigateToHome()
+        {
+
+            await _navigationService.NavigateToAsync<HomePage>();
+        }
+        private async Task NavigateToProfile()
 		{
 
 			await _navigationService.NavigateToAsync<ProfilePage>();
@@ -123,5 +131,47 @@ namespace WatersAD.ViewModels
 		{
 			await _navigationService.NavigateToAsync<QuestionsPage>();
 		}
-	}
+
+        private async Task ReconfigureShellAsync()
+        {
+            // Obtenha o estado de login novamente
+            bool isUserLoggedIn = _authService.IsLoggedIn();
+
+            // Redefine o Shell
+            var shell = Application.Current.MainPage as AppShell;
+            shell.Items.Clear();
+
+            if (isUserLoggedIn)
+            {
+                shell.Items.Add(new TabBar
+                {
+                    Items =
+            {
+                new ShellContent { Title = "Home", Icon="home", Content = new HomePage(new HomePageViewModel()) },
+                new ShellContent { Title = "Preços", Icon="pricelist", Content = new ServicePriceListPage(new TiersViewModel(_apiService)) },
+                new ShellContent { Title = "Leitura", Icon="watermeter", Content = new AddConsumptionPage(new AddCosumptionViewModel(_apiService, _navigationService)) },
+                new ShellContent { Title = "Consumos", Icon="watertap", Content = new ConsumptionsAndInvoicesPage(new ConsumptionInvoiceViewModel(_apiService, _navigationService)) },
+                new ShellContent { Title = "Conta", Icon="account", Content = new ProfileSettingsPage(new ProfileSettingsViewModel(_authService, _apiService, _dataValidator, _navigationService)) }
+            }
+                });
+            }
+            else
+            {
+                shell.Items.Add(new TabBar
+                {
+                    Items =
+            {
+                new ShellContent { Title = "Home", Icon="home", Content = new HomePage(new HomePageViewModel()) },
+                new ShellContent { Title = "Preços", Icon="pricelist", Content = new ServicePriceListPage(new TiersViewModel(_apiService)) },
+                new ShellContent { Title = "Contador", Icon="watertap", Content = new RequestWaterMeterPage(new RequestWaterMeterViewModel(_apiService, _navigationService)) },
+                new ShellContent { Title = "Info", Icon="info", Content = new InformationPage() },
+                new ShellContent { Title = "Login", Icon="login", Content = new LoginPage(new LoginViewModel(_apiService, _dataValidator, _authService, _navigationService)) }
+            }
+                });
+            }
+
+            await NavigateToHome();
+        }
+
+    }
 }

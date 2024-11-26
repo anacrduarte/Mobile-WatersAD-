@@ -3,20 +3,21 @@
 	public class WaterMeter
 	{
 
-		public int id { get; set; }
-		public string address { get; set; }
-		public string houseNumber { get; set; }
-		public string postalCode { get; set; }
-		public string remainPostalCode { get; set; }
-		public int localityId { get; set; }
-		public Locality locality { get; set; }
-		public bool isActive { get; set; }
-		public DateTime installationDate { get; set; }
-		public int clientId { get; set; }
-		public Client client { get; set; }
-		public int waterMeterServiceId { get; set; }
-		public WaterMeterService waterMeterService { get; set; }
-		public string fullPostalCode { get; set; }
-		public string fullAdress { get; set; }
+		public int Id { get; set; }
+		public string Address { get; set; } = null!;
+		public string HouseNumber { get; set; } = null!;
+		public string PostalCode { get; set; } = null!;
+		public string RemainPostalCode { get; set; } = null!;
+		public int LocalityId { get; set; }
+		public Locality? Locality { get; set; } 
+		public bool IsActive { get; set; }
+		public DateTime InstallationDate { get; set; }
+		public int ClientId { get; set; }
+		public Client? Client { get; set; }
+		public int WaterMeterServiceId { get; set; }
+		public WaterMeterService? WaterMeterService { get; set; }
+		public string FullPostalCode { get; set; } = null!;
+		public string FullAdress { get; set; } = null!;
+
 	}
 }

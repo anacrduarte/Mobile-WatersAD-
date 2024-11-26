@@ -8,24 +8,25 @@ namespace WatersAD.Models
 {
 	public class Client
 	{
-		public int id { get; set; }
-		public string firstName { get; set; }
-		public string lastName { get; set; }
-		public string address { get; set; }
-		public string houseNumber { get; set; }
-		public string email { get; set; }
-		public object user { get; set; }
-		public string nif { get; set; }
-		public string phoneNumber { get; set; }
-		public int localityId { get; set; }
-		public object locality { get; set; }
-		public string postalCode { get; set; }
-		public string remainPostalCode { get; set; }
-		public int numberWaterMeters { get; set; }
-		public bool isActive { get; set; }
-		public string fullName { get; set; }
-		public string fullPostalCode { get; set; }
-		public string fullAdress { get; set; }
-		public object oldEmail { get; set; }
+		public int Id { get; set; }
+		public string FirstName { get; set; } = null!;
+		public string LastName { get; set; } = null!;
+		public string Address { get; set; } = null!;
+		public string HouseNumber { get; set; } = null!;
+		public string Email { get; set; } = null!;
+		public object User { get; set; } = null!;
+		public string Nif { get; set; } = null!;
+		public string PhoneNumber { get; set; } = null!;
+		public int LocalityId { get; set; }
+		public Locality? Locality { get; set; } 
+		public string PostalCode { get; set; } = null!;
+		public string RemainPostalCode { get; set; } = null!;
+		public int NumberWaterMeters { get; set; }
+		public bool IsActive { get; set; }
+		public string FullName { get; set; } = null!;
+		public string FullPostalCode { get; set; } = null!;
+		public string FullAdress { get; set; } = null!;
+		public object OldEmail { get; set; } = null!;
+
 	}
 }

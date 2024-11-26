@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WatersAD.Views.InformationPage"
+             Title="Informações">
+
+  
+
+        <Grid RowDefinitions="Auto, *, Auto">
+       
+            
+
+       
+            <Grid Grid.Row="1"
+              HorizontalOptions="Center"
+              VerticalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid ColumnDefinitions="Auto, Auto" Grid.Row="0" Margin="0,10">
+                <Label Text="Sobre a Aplicação"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   TextColor="{StaticResource Magenta}"
+                   Grid.Row="0" />
+            </Grid>
+         
+                <Grid ColumnDefinitions="Auto, Auto" Grid.Row="1" Margin="0,10">
+                    <Label Text="Autor: " 
+                       FontAttributes="Bold" 
+                       TextColor="{StaticResource PrimaryDarkText}" 
+                       Grid.Column="0" 
+                           Margin="28,0,0,0"/>
+                    <Label Text=" Ana Duarte" 
+                       TextColor="{StaticResource Secondary}" 
+                       Grid.Column="1" />
+                </Grid>
+
+           
+                <Grid ColumnDefinitions="Auto, Auto" Grid.Row="2" Margin="0,10">
+                    <Label Text="Versão: " 
+                       FontAttributes="Bold" 
+                       TextColor="{StaticResource PrimaryDarkText}" 
+                       Grid.Column="0"
+                           Margin="35,0,0,0"/>
+                    <Label Text=" 1.0.0" 
+                       TextColor="{StaticResource Secondary}" 
+                       Grid.Column="1" />
+                </Grid>
+
+         
+                <Grid ColumnDefinitions="Auto, Auto" Grid.Row="3" Margin="0,10">
+                    <Label Text="Data: " 
+                       FontAttributes="Bold" 
+                       TextColor="{StaticResource PrimaryDarkText}" 
+                       Grid.Column="0"
+                           Margin="28,0,0,0"/>
+                    <Label Text=" 26/12/2024" 
+                       TextColor="{StaticResource Secondary}" 
+                       Grid.Column="1" />
+                </Grid>
+            </Grid>
+        </Grid>
+    
+
+
+</ContentPage>

@@ -12,11 +12,19 @@
           RowSpacing="20"
           Margin="20,100,20,40">
 
-        <Image Grid.Row="0"
-               Source="logoblue.png"
-               Aspect="AspectFit"
-               HeightRequest="150"
-               WidthRequest="150" />
+        <Frame Grid.Row="0"
+       HeightRequest="150"
+       WidthRequest="150"
+       CornerRadius="25"
+            Padding="0"
+       BackgroundColor="Transparent"
+       HorizontalOptions="Center"
+       VerticalOptions="Center">
+            <Image Source="logoblue.png"
+           Aspect="AspectFit"
+           HeightRequest="150"
+           WidthRequest="150" />
+        </Frame>
         <Label Grid.Row="1"
                Text="Login"
                FontAttributes="Bold"

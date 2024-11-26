@@ -8,12 +8,13 @@ namespace WatersAD.Models
 {
 	public class Invoice
 	{
-		public int id { get; set; }
-		public DateTime invoiceDate { get; set; }
-		public int clientId { get; set; }
-		public bool issued { get; set; }
-		public bool sent { get; set; }
-		public double totalAmount { get; set; }
-		public DateTime limitDate { get; set; }
+		public int Id { get; set; }
+		public DateTime InvoiceDate { get; set; }
+		public int ClientId { get; set; }
+		public bool Issued { get; set; }
+		public bool Sent { get; set; }
+		public double TotalAmount { get; set; }
+		public DateTime LimitDate { get; set; }
+
 	}
 }

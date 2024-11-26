@@ -4,20 +4,31 @@ namespace WatersAD.Views;
 
 public partial class HomePage : ContentPage
 {
-	public HomePage()
+    private readonly HomePageViewModel _model;
+
+    public HomePage(HomePageViewModel model)
 	{
 		InitializeComponent();
-        BindingContext = new HomePageViewModel();
-        StartTextRotation();
+       
+        _model = model;
+        BindingContext = _model;
     }
 
-    private async void StartTextRotation()
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        await StartTextRotation();
+
+    }
+
+    private async Task StartTextRotation()
     {
         await Task.Delay(500);
         while (true)
         {
             await ShowText(Text1);
-            await Task.Delay(2000); // Exibe o texto por 2 segundos
+            await Task.Delay(2000);
             await ShowText(Text2);
             await Task.Delay(2000);
             await ShowText(Text3);
@@ -25,20 +36,21 @@ public partial class HomePage : ContentPage
         }
     }
 
+
     private async Task ShowText(Label labelToShow)
     {
-        // Oculta todos os textos
+
         Text1.IsVisible = false;
         Text2.IsVisible = false;
         Text3.IsVisible = false;
 
-        // Mostra o texto desejado com uma animação de fade-in
+
         labelToShow.Opacity = 0;
         labelToShow.IsVisible = true;
         for (double i = 0; i <= 1; i += 0.1)
         {
             labelToShow.Opacity = i;
-            await Task.Delay(50); // Pequeno atraso para simular o fade-in
+            await Task.Delay(50);
         }
     }
 }

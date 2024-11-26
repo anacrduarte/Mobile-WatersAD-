@@ -8,11 +8,11 @@ namespace WatersAD.Models
 {
 	public class InvoiceDetails
 	{
-		public Client Client { get; set; }
-		public WaterMeter WaterMeter { get; set; }
-		public Invoice Invoice { get; set; }
-		public Consumption Consumption { get; set; }
-		public WaterMeterService WaterMeterService { get; set; }
-		public Tiers Tier { get; set; }
+		public Client? Client { get; set; }
+		public WaterMeter? WaterMeter { get; set; } 
+		public Invoice? Invoice { get; set; } 
+		public Consumption? Consumption { get; set; } 
+		public WaterMeterService? WaterMeterService { get; set; }
+		public Tiers? Tier { get; set; }
 	}
 }

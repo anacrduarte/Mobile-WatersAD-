@@ -4,50 +4,65 @@
              xmlns:viewModels="clr-namespace:WatersAD.ViewModels"
               x:DataType="viewModels:ProfileViewModel" 
              x:Class="WatersAD.Views.ProfilePage"
-             
-             Title="ProfilePage">
+             Title="Editar dados" BackgroundColor="{StaticResource Secondary}">
     <Grid RowDefinitions="Auto,*" RowSpacing="0">
 
         <VerticalStackLayout Grid.Row="0"
-                       BackgroundColor="{StaticResource Secondary}"
-                       VerticalOptions="Start"
-                       Spacing="1"
-                       Padding="20">
-         
-            <ImageButton Source="{Binding ImagePath}"
-                           HeightRequest="200"
-                           WidthRequest="300"
-                           CornerRadius="125"
-                           Aspect="AspectFit"
-                           x:Name="ImgBtnProfile"
-                         Command="{Binding ChangeImageInCommand , Mode=TwoWay}"
-                         />
+                      
+                         VerticalOptions="Start"
+                         Spacing="15"
+                         Padding="20">
 
-    
+  
+            <Frame BackgroundColor="White" 
+               Padding="0"
+               HasShadow="True"
+               CornerRadius="120"  
+               HorizontalOptions="Center">
+                <ImageButton Source="{Binding ImagePath}"
+                             Command="{Binding ChangeImageInCommand}"
+                         HeightRequest="220"
+                         WidthRequest="220"
+                         Aspect="AspectFill"
+                         CornerRadius="60"
+                         HorizontalOptions="Center" 
+                               BackgroundColor="{StaticResource Magenta}"/>
+            </Frame>
 
         </VerticalStackLayout>
+
+
         <VerticalStackLayout Grid.Row="1"
-                       Margin="20"
-                       Spacing="20">
+                         Margin="20"
+                         Spacing="20">
 
-            <Entry Placeholder="Nome Próprio"
-             FontSize="12"
-             x:Name="EntFirstName" 
-                   Text="{Binding FirstName, Mode=TwoWay}"/>
 
-            <Entry Placeholder="Apelido"
-             Keyboard="Email"
-             FontSize="12"
-             x:Name="EntLastName"
-                    Text="{Binding LastName, Mode=TwoWay}"/>
-    
-
+            <Frame CornerRadius="10" Padding="35" HasShadow="True">
+                <StackLayout>
+                    <Label Text="Nome:"
+    FontSize="14"
+    HorizontalOptions="Start" />
+                    <Entry Placeholder="Nome Próprio"
+                       FontSize="14"
+                       x:Name="EntFirstName" 
+                       Text="{Binding FirstName, Mode=TwoWay}" 
+                           Margin="0,0,0,10"/>
+                    <Label Text="Apelido:"
+    FontSize="14"
+    HorizontalOptions="Start" />
+                    <Entry Placeholder="Apelido:"
+                       Keyboard="Email"
+                       FontSize="14"
+                       x:Name="EntLastName"
+                       Text="{Binding LastName, Mode=TwoWay}" />
+                </StackLayout>
+            </Frame>
 
             <Button Text="Guardar"
-              FontSize="Small"
-              FontAttributes="Bold"
-              Command="{Binding ChangeDataInCommand}"
-             />
+                FontSize="Small"
+                FontAttributes="Bold"
+                Command="{Binding ChangeDataInCommand}"/>
         </VerticalStackLayout>
+
     </Grid>
 </ContentPage>

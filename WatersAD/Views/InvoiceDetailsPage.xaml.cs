@@ -10,7 +10,7 @@ public partial class InvoiceDetailsPage : ContentPage
 	{
 		InitializeComponent();
 		_model = model;
-		BindingContext = _model;
+		
 	}
 
 
@@ -19,12 +19,14 @@ public partial class InvoiceDetailsPage : ContentPage
 		base.OnAppearing();
 
 
+
 		if (BindingContext is Dictionary<string, object> parameters)
 		{
 			if (parameters.ContainsKey("InvoiceId"))
 			{
 				int invoiceId = (int)parameters["InvoiceId"];
 				_model.LoadInvoiceDetails(invoiceId);
+				BindingContext = _model;
 
 			}
 		}

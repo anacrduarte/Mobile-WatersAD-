@@ -1,11 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WatersAD.Models;
 using WatersAD.Services;
 
@@ -37,20 +31,14 @@ namespace WatersAD.ViewModels
 
             if (response.Tiers != null && response.Tiers.Any())
             {
-                // Limpa a coleção existente
+
                 AllTiers.Clear();
 
-                // Adiciona todos os tiers recebidos à coleção
                 foreach (var tier in response.Tiers)
                 {
                     AllTiers.Add(tier);
                 }
 
-                // Se você precisa usar o primeiro, ainda pode fazer isso
-                //var firstTier = response.Tiers.First();
-                //TierName = firstTier.TierName;
-                //TierPrice = firstTier.TierPrice;
-                //UpperLimit = firstTier.UpperLimit;
             }
 
         }

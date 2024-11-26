@@ -4,79 +4,90 @@
              x:Class="WatersAD.Views.RequestWaterMeterPage"
                xmlns:viewModels="clr-namespace:WatersAD.ViewModels"
              x:DataType="viewModels:RequestWaterMeterViewModel" 
-             Title="RequestWaterMeterPage"         BackgroundColor="#2D2D2D">
+             Title="Pedido de Contador">
     <ScrollView>
-        <StackLayout Padding="20" Spacing="15">
-          
-            <Label Text="Pedido de Contador" 
-               FontSize="24" 
-               TextColor="White" 
-               HorizontalOptions="Center" />
+        <StackLayout Padding="20" Spacing="15" BackgroundColor="{StaticResource Secondary}">
 
-       
             <Label Text="Dados Pessoais" 
-               FontSize="18" 
-               TextColor="White" 
-               Margin="0,10,0,0" />
-          
-              
+               FontSize="20" 
+               FontAttributes="Bold" 
+               TextColor="{StaticResource Magenta}" 
+               Margin="0,10,0,10" />
 
-                <Entry Placeholder="Nome próprio" Text="{Binding FirstName}" BackgroundColor="White" />
-                <Entry Placeholder="Apelido" Text="{Binding LastName}" BackgroundColor="White" />
-                <Entry Placeholder="Email" Text="{Binding Email}" Keyboard="Email" BackgroundColor="White" />
-                <Entry Placeholder="Nº Telefone" Text="{Binding PhoneNumber}" Keyboard="Telephone" BackgroundColor="White" />
-                <Entry Placeholder="NIF" Text="{Binding Nif}" Keyboard="Numeric" BackgroundColor="White" />
-                <Entry Placeholder="Rua" Text="{Binding Address}" BackgroundColor="White" />
-                <Entry Placeholder="Nº" Text="{Binding HouseNumber}" Keyboard="Numeric" BackgroundColor="White" />
-                <Entry Placeholder="Código-Postal" Text="{Binding PostalCode}" Keyboard="Numeric" BackgroundColor="White" />
-                <Entry Placeholder="Extensão Código Postal" Text="{Binding RemainPostalCode}" Keyboard="Numeric" BackgroundColor="White" />
+            <Frame CornerRadius="10" Padding="15"  HasShadow="True">
+                <StackLayout Spacing="10">
+                    <Entry Placeholder="Nome próprio" Text="{Binding FirstName}" BackgroundColor="White" TextColor="{StaticResource PrimaryDarkText}" />
+                    <Entry Placeholder="Apelido" Text="{Binding LastName}" BackgroundColor="White" TextColor="{StaticResource PrimaryDarkText}" />
+                    <Entry Placeholder="Email" Text="{Binding Email}" Keyboard="Email" BackgroundColor="White" TextColor="{StaticResource PrimaryDarkText}" />
+                    <Entry Placeholder="Nº Telefone" Text="{Binding PhoneNumber}" Keyboard="Telephone" BackgroundColor="White" TextColor="{StaticResource PrimaryDarkText}" />
+                    <Entry Placeholder="NIF" Text="{Binding Nif}" Keyboard="Numeric" BackgroundColor="White" TextColor="{StaticResource PrimaryDarkText}" />
+                    <Entry Placeholder="Rua" Text="{Binding Address}" BackgroundColor="White" TextColor="{StaticResource PrimaryDarkText}" />
+                    <Entry Placeholder="Nº" Text="{Binding HouseNumber}" Keyboard="Numeric" BackgroundColor="White" TextColor="{StaticResource PrimaryDarkText}" />
+                    <Entry Placeholder="Código-Postal" Text="{Binding PostalCode}" Keyboard="Numeric" BackgroundColor="White" TextColor="{StaticResource PrimaryDarkText}" />
+                    <Entry Placeholder="Extensão Código Postal" Text="{Binding RemainPostalCode}" Keyboard="Numeric" BackgroundColor="White" TextColor="{StaticResource PrimaryDarkText}" />
+                    <Picker Title="▼ País " 
+                        ItemsSource="{Binding Countries}" 
+                        ItemDisplayBinding="{Binding Name}" 
+                        SelectedItem="{Binding SelectedCountry, Mode=TwoWay}" 
+                        BackgroundColor="White" 
+                        TextColor="{StaticResource PrimaryDarkText}" />
+                    <Picker Title="▼ Cidade" 
+                        ItemsSource="{Binding Cities}" 
+                        ItemDisplayBinding="{Binding Name}" 
+                        SelectedItem="{Binding SelectedCity, Mode=TwoWay}" 
+                        BackgroundColor="White" 
+                        TextColor="{StaticResource PrimaryDarkText}" />
+                    <Picker Title="▼ Localidade" 
+                        ItemsSource="{Binding Localities}" 
+                        ItemDisplayBinding="{Binding Name}" 
+                        SelectedItem="{Binding Locality, Mode=TwoWay}" 
+                        BackgroundColor="White" 
+                        TextColor="{StaticResource PrimaryDarkText}" />
+                </StackLayout>
+            </Frame>
 
-                <Picker Title="País" 
-            ItemsSource="{Binding Countries}" 
-            ItemDisplayBinding="{Binding Name}" 
-            SelectedItem="{Binding SelectedCountry, Mode=TwoWay}" />
-                <Picker Title="Cidade" 
-            ItemsSource="{Binding Cities}" 
-            ItemDisplayBinding="{Binding Name}" 
-            SelectedItem="{Binding SelectedCity, Mode=TwoWay}" />
-                <Picker Title="Localidade" 
-            ItemsSource="{Binding Localities}" 
-            ItemDisplayBinding="{Binding Name}" 
-            SelectedItem="{Binding Locality, Mode=TwoWay}" />
-          
-
-       
             <Label Text="Dados do Contador" 
-               FontSize="18" 
-               TextColor="White" 
-               Margin="0,10,0,0" />
-          
-                <Entry Placeholder="Rua do contador" Text="{Binding AddressWaterMeter}" BackgroundColor="White" />
-                <Entry Placeholder="Nº" Text="{Binding HouseNumberWaterMeter}" Keyboard="Numeric" BackgroundColor="White" />
-                <Entry Placeholder="Código-Postal" Text="{Binding PostalCodeWaterMeter}" Keyboard="Numeric" BackgroundColor="White" />
-                <Entry Placeholder="Extensão Código Postal" Text="{Binding RemainPostalCodeWaterMeter}" Keyboard="Numeric" BackgroundColor="White" />
-                <Picker Title="País" 
-            ItemsSource="{Binding CountriesWM}" 
-            ItemDisplayBinding="{Binding Name}" 
-            SelectedItem="{Binding SelectedCountryWM, Mode=TwoWay}" />
-                <Picker Title="Cidade" 
-            ItemsSource="{Binding CitiesWM}" 
-            ItemDisplayBinding="{Binding Name}" 
-            SelectedItem="{Binding SelectedCityWM, Mode=TwoWay}" />
-                <Picker Title="Localidade" 
-            ItemsSource="{Binding LocalitiesWM}" 
-            ItemDisplayBinding="{Binding Name}" 
-            SelectedItem="{Binding LocalityWM, Mode=TwoWay}" />
-       
+               FontSize="20" 
+               FontAttributes="Bold" 
+               TextColor="{StaticResource Magenta}" 
+               Margin="0,20,0,10" />
 
-      
+            <Frame CornerRadius="10" Padding="15" HasShadow="True">
+                <StackLayout Spacing="10">
+                    <Entry Placeholder="Rua do contador" Text="{Binding AddressWaterMeter}" BackgroundColor="White" TextColor="{StaticResource PrimaryDarkText}" />
+                    <Entry Placeholder="Nº" Text="{Binding HouseNumberWaterMeter}" Keyboard="Numeric" BackgroundColor="White" TextColor="{StaticResource PrimaryDarkText}" />
+                    <Entry Placeholder="Código-Postal" Text="{Binding PostalCodeWaterMeter}" Keyboard="Numeric" BackgroundColor="White" TextColor="{StaticResource PrimaryDarkText}" />
+                    <Entry Placeholder="Extensão Código Postal" Text="{Binding RemainPostalCodeWaterMeter}" Keyboard="Numeric" BackgroundColor="White" TextColor="{StaticResource PrimaryDarkText}" />
+                    <Picker Title="▼ País" 
+                        ItemsSource="{Binding CountriesWM}" 
+                        ItemDisplayBinding="{Binding Name}" 
+                        SelectedItem="{Binding SelectedCountryWM, Mode=TwoWay}" 
+                        BackgroundColor="White" 
+                        TextColor="{StaticResource PrimaryDarkText}" />
+                    <Picker Title="▼ Cidade" 
+                        ItemsSource="{Binding CitiesWM}" 
+                        ItemDisplayBinding="{Binding Name}" 
+                        SelectedItem="{Binding SelectedCityWM, Mode=TwoWay}" 
+                        BackgroundColor="White" 
+                        TextColor="{StaticResource PrimaryDarkText}" />
+                    <Picker Title="▼ Localidade" 
+                        ItemsSource="{Binding LocalitiesWM}" 
+                        ItemDisplayBinding="{Binding Name}" 
+                        SelectedItem="{Binding LocalityWM, Mode=TwoWay}" 
+                        BackgroundColor="White" 
+                        TextColor="{StaticResource PrimaryDarkText}" />
+                </StackLayout>
+            </Frame>
+
+        
             <Button Text="Submeter Pedido" 
-                BackgroundColor="#007BFF" 
+                BackgroundColor="{StaticResource Magenta}" 
                 TextColor="White" 
                 FontSize="18" 
                 CornerRadius="5" 
-                     Command="{Binding SendRequestCommand}"
-              />
+                Command="{Binding SendRequestCommand}"
+                Margin="0,20,0,0" />
         </StackLayout>
     </ScrollView>
+
 </ContentPage>

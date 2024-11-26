@@ -7,17 +7,26 @@ using System.Threading.Tasks;
 
 namespace WatersAD.Models
 {
-	public class Consumption
+	public class AddConsumption
 	{
 		public int Id { get; set; }
-		public int TierId { get; set; }
-		public Tiers Tier { get; set; } 
-		public DateTime ConsumptionDate { get; set; }
-		public DateTime RegistrationDate { get; set; }
-		public int ConsumptionValue { get; set; }
+
+		public int ConsumptionId { get; set; }
+
+		public Consumption? Consumption { get; set; }
+
+		public int ClientId { get; set; }
+
+		public Client? Client { get; set; }
+
 		public int WaterMeterId { get; set; }
-		public WaterMeter WaterMeter { get; set; } 
-		public Invoice Invoice { get; set; } 
+
+
+		public DateTime ConsumptionDate { get; set; }
+
+		public DateTime RegistrationDate { get; set; }
+
+		public double ConsumptionValue { get; set; }
 
 	}
 }

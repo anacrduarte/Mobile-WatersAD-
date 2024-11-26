@@ -56,17 +56,31 @@
                        Margin="10,0,10,10"/>
             
         </StackLayout>
-            <CarouselView ItemsSource="{Binding ImageSources}" >
-                            <CarouselView.ItemTemplate>
-                                <DataTemplate>
-                                    <Image Source="{Binding}" 
-                                           Aspect="AspectFill"
-                                           HeightRequest="250" />
-                                </DataTemplate>
-                            </CarouselView.ItemTemplate>
-                        </CarouselView>
+            <Grid>
+                <CarouselView ItemsSource="{Binding ImageSources}" 
+                  Position="{Binding Position}" 
+                  HeightRequest="270">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding}" 
+                       Aspect="AspectFill" />
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
 
-            <StackLayout Padding="20" Spacing="20" >
+                <Button Text="◀" 
+            Command="{Binding GoToPreviousCommand}" 
+            HorizontalOptions="Start" 
+            VerticalOptions="Center" 
+            BackgroundColor="Transparent" />
+
+                <Button Text="▶" 
+            Command="{Binding GoToNextCommand}" 
+            HorizontalOptions="End" 
+            VerticalOptions="Center" 
+            BackgroundColor="Transparent" />
+            </Grid>
+            <StackLayout Padding="20" Spacing="20" Margin="0,0,0,40">
                 <Label Text="Horários"
                        FontSize="24"
                        FontAttributes="Bold"

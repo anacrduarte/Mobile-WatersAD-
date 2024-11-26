@@ -1,11 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WatersAD.Models;
 using WatersAD.Services;
 using WatersAD.Views;
@@ -19,18 +14,27 @@ namespace WatersAD.ViewModels
 
 		[ObservableProperty]
 		private ObservableCollection<Consumption> consumptions = null!;
-	
 
-		public IAsyncRelayCommand DetailsDataCommand { get; }
+        [ObservableProperty]
+        private int selectedYear;
+
+        
+        public ObservableCollection<int> Years { get; set; }
+
+        public IAsyncRelayCommand DetailsDataCommand { get; }
+
 		public ConsumptionInvoiceViewModel(ApiService apiService, INavigationService navigationService)
-        {
-			
+		{
+
 			_apiService = apiService;
 			_navigationService = navigationService;
 
-			
+
 			DetailsDataCommand = new AsyncRelayCommand<int>(async (id) => await NavigateToInvoiceDetails(id));
-		}
+
+            Years = new ObservableCollection<int> { 2022, 2023, 2024, 2025, 2026 };
+
+        }
 
 		private async Task NavigateToInvoiceDetails(int id)
 		{
@@ -41,13 +45,34 @@ namespace WatersAD.ViewModels
 			await _navigationService.NavigateToAsync<InvoiceDetailsPage>(parameters);
 		}
 
-		public async void Initialize()
+        partial void OnSelectedYearChanged(int value)
+        {
+            FilterConsumptions();
+        }
+        public async void FilterConsumptions()
+        {
+            
+            if (SelectedYear != 0)
+            {
+                Consumptions = new ObservableCollection<Consumption>(Consumptions.Where(c => c.ConsumptionDate.Year == SelectedYear));
+
+				if (Consumptions.Count == 0)
+				{
+                    await Application.Current!.MainPage!.DisplayAlert("Aviso", "Não tem faturas na data selecionada.", "OK");
+                    SelectedYear = 0;
+                    Initialize();
+                }
+            }
+			
+        }
+
+        public async void Initialize()
 		{
 			try
 			{
 
 				var email = Preferences.Get("username", string.Empty);
-				if(string.IsNullOrEmpty(email))
+				if (string.IsNullOrEmpty(email))
 				{
 					return;
 				}
@@ -55,8 +80,8 @@ namespace WatersAD.ViewModels
 
 				Consumptions = new ObservableCollection<Consumption>(response.Consumptions!);
 
-				
-			}
+
+            }
 			catch (Exception)
 			{
 				await Application.Current!.MainPage!.DisplayAlert("Erro", "Não foi possível carregar a lista de países. Tente novamente mais tarde.", "OK");

@@ -28,9 +28,19 @@ namespace WatersAD
     		builder.Logging.AddDebug();
 #endif
             builder.Services.AddHttpClient();
+            builder.Services.AddSingleton<AppShell>();
             builder.Services.AddSingleton<ApiService>();
             builder.Services.AddSingleton<AuthService>();
             builder.Services.AddSingleton<IDataValidator, DataValidator>();
+            builder.Services.AddSingleton<INavigationService, NavigationService>();
+            builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<ChangePasswordPage>();
+            builder.Services.AddTransient<ForgotPasswordPage>();
+            builder.Services.AddTransient<ProfileSettingsPage>();
+            builder.Services.AddTransient<QuestionsPage>();
+            builder.Services.AddTransient<InvoiceDetailsPage>();
+            builder.Services.AddTransient<HomePage>();
+
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<ProfileViewModel>();
             builder.Services.AddTransient<TiersViewModel>();
@@ -38,20 +48,18 @@ namespace WatersAD
             builder.Services.AddTransient<ProfileSettingsViewModel>();
 			builder.Services.AddTransient<ChangePasswordViewModel>();
 			builder.Services.AddTransient<RecoverPasswordViewModel>();
-			builder.Services.AddSingleton<INavigationService, NavigationService>();
+	
 			builder.Services.AddTransient<ProfilePage>();
 			builder.Services.AddTransient<RequestWaterMeterViewModel>();
 			builder.Services.AddTransient<ConsumptionInvoiceViewModel>();
 			builder.Services.AddTransient<InvoiceDetailsViewModel>();
+			builder.Services.AddTransient<AddCosumptionViewModel>();
+  
 
-			builder.Services.AddSingleton<AppShell>();
-			builder.Services.AddSingleton<LoginPage>();
-			builder.Services.AddSingleton<ChangePasswordPage>();
-			builder.Services.AddSingleton<ForgotPasswordPage>();
-			builder.Services.AddSingleton<ProfileSettingsPage>();
-			builder.Services.AddSingleton<QuestionsPage>();
-			builder.Services.AddSingleton<InvoiceDetailsPage>();
-			return builder.Build();
+
+           
+		
+            return builder.Build();
         }
     }
 }

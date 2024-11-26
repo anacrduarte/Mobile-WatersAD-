@@ -5,32 +5,196 @@
               xmlns:viewModels="clr-namespace:WatersAD.ViewModels"
               x:DataType="viewModels:InvoiceDetailsViewModel" 
             xmlns:models="clr-namespace:WatersAD.Models"
-             Title="InvoiceDetailsPage">
+             Title="Detalhes">
 
-    <StackLayout Padding="10">
-      
-        <Label Text="Invoice Details"
-           FontSize="24"
-           HorizontalOptions="Center" />
+    <ScrollView>
+        <StackLayout Padding="10">
+            <!-- Detalhes da Fatura -->
+            <Label Text="Detalhes da Fatura" FontSize="24" HorizontalOptions="Center" FontAttributes="Bold" Margin="10"/>
+            <Frame 
+               CornerRadius="25"
+                    Padding="0"
+               BackgroundColor="{StaticResource Primary}"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="Center">
+                <Grid Padding="10" RowSpacing="10" ColumnSpacing="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-        <Label Text="Invoice Number:"
-           FontSize="18" />
+    
+                <Label Text="Número:" FontSize="18" FontAttributes="Bold" Grid.Row="0" />
+                <Label Text="{Binding Invoices.Invoice.Id}" Grid.Row="0" Grid.Column="1" />
 
-        <Label x:DataType="models:InvoiceDetails" Text="{Binding Invoice.totalAmount}" />
+   
+                    <Label Text="Data:" FontSize="18" FontAttributes="Bold" Grid.Row="1" />
+                <Label Text="{Binding Invoices.Invoice.InvoiceDate, StringFormat='{0:MMMM dd, yyyy}'}" Grid.Row="1" Grid.Column="1" />
 
-        <Label Text="Invoice Date:"
-           FontSize="18" />
+   
+                    <Label Text="Limite de Pagamento:" FontAttributes="Bold" FontSize="18" Grid.Row="6" />
+                <Label Text="{Binding Invoices.Invoice.LimitDate, StringFormat='{0:MMMM dd, yyyy}'}" Grid.Row="6" Grid.Column="1" />
 
-        <Label Text="{Binding Invoices.Invoice.invoiceDate, StringFormat='{0:MMMM dd, yyyy}'}" />
+                
+                    <Label Text="Valor Total:" FontSize="18" FontAttributes="Bold" Grid.Row="3" />
+                <Label Text="{Binding Invoices.Invoice.TotalAmount, StringFormat='{0:C}'}" Grid.Row="3" Grid.Column="1" />
 
-        <Label Text="Total Amount:"
-           FontSize="18" />
+              
+                    <Label Text="Emitida:" FontSize="18" FontAttributes="Bold" Grid.Row="4" />
+                    <Label Grid.Row="4" Grid.Column="1">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Invoices.Invoice.Issued}" Value="True">
+                                <Setter Property="Text" Value="Sim" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding Invoices.Invoice.Issued}" Value="False">
+                                <Setter Property="Text" Value="Não" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Label Text="Enviada:" FontSize="18" FontAttributes="Bold" Grid.Row="2" />
+                    <Label Grid.Row="2" Grid.Column="1">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Invoices.Invoice.Sent}" Value="True">
+                                <Setter Property="Text" Value="Sim" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding Invoices.Invoice.Sent}" Value="False">
+                                <Setter Property="Text" Value="Não" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Label Text="Escalão:" FontSize="18" FontAttributes="Bold" Grid.Row="5" />
+                    <Label Text="{Binding Invoices.Tier.TierName}" Grid.Row="5" Grid.Column="1" />
 
-        <Label Text="{Binding Invoices.Invoice.totalAmount, StringFormat='{0:C}'}" />
+                </Grid>
+            </Frame>
 
-        <Label Text="Status:"
-           FontSize="18" />
-  
-        <Label Text="{Binding Invoices.Invoice.issued}" />
-    </StackLayout>
+            <Label Text="Detalhes do Cliente" FontSize="24" HorizontalOptions="Center" FontAttributes="Bold" Margin="10" />
+
+            <Frame HorizontalOptions="FillAndExpand"
+     CornerRadius="25"
+          Padding="0"
+     BackgroundColor="{StaticResource Magenta}"
+     
+     VerticalOptions="Center">
+                <Grid Padding="10" RowSpacing="10" ColumnSpacing="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+             
+                    <Label Text="Nome:" FontAttributes="Bold" FontSize="18" Grid.Row="0" />
+                <Label Text="{Binding Invoices.Client.FullName}" Grid.Row="0" Grid.Column="1" />
+
+                    <Label Text="Morada:" FontSize="18" FontAttributes="Bold" Grid.Row="1" />
+                <Label Text="{Binding Invoices.Client.FullAdress}" Grid.Row="1" Grid.Column="1" />
+
+                <Label Text="{Binding Invoices.Client.FullPostalCode}" Grid.Row="2" Grid.Column="1" />
+                <Label Text="{Binding Invoices.Client.Locality.Name}" Grid.Row="3" Grid.Column="1" />
+                <Label Text="{Binding Invoices.Client.Locality.City.Name}" Grid.Row="4" Grid.Column="1" />
+                <Label Text="{Binding Invoices.Client.Locality.City.Country.Name}" Grid.Row="5" Grid.Column="1" />
+
+                    <Label Text="Telefone:" FontSize="18" FontAttributes="Bold" Grid.Row="6" />
+                <Label Text="{Binding Invoices.Client.PhoneNumber}" Grid.Row="6" Grid.Column="1" />
+
+                    <Label Text="E-mail:" FontSize="18" FontAttributes="Bold" Grid.Row="7" />
+                <Label Text="{Binding Invoices.Client.Email}" Grid.Row="7" Grid.Column="1" />
+            </Grid>
+            </Frame>
+
+            <Label Text="Detalhes do Contador" FontSize="24" HorizontalOptions="Center"  FontAttributes="Bold" Margin="10"/>
+
+
+            <Frame HorizontalOptions="FillAndExpand"
+     CornerRadius="25"
+          Padding="0"
+     BackgroundColor="{StaticResource Primary}"
+     
+     VerticalOptions="Center">
+                <Grid Padding="10" RowSpacing="10" ColumnSpacing="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+            
+                    <Label Text="Morada:" FontSize="18" Grid.Row="0" FontAttributes="Bold"  />
+                <Label Text="{Binding Invoices.WaterMeter.FullAdress}" Grid.Row="0" Grid.Column="1" />
+
+                <Label Text="{Binding Invoices.WaterMeter.FullPostalCode}" Grid.Row="1" Grid.Column="1"  />
+                <Label Text="{Binding Invoices.WaterMeter.Locality.Name}" Grid.Row="2" Grid.Column="1" />
+                <Label Text="{Binding Invoices.WaterMeter.Locality.City.Name}" Grid.Row="3" Grid.Column="1" />
+                <Label Text="{Binding Invoices.WaterMeter.Locality.City.Country.Name}" Grid.Row="4" Grid.Column="1" />
+
+           
+                    <Label Text="Data de Instalação:" FontSize="18" Grid.Row="5"  FontAttributes="Bold" />
+                <Label Text="{Binding Invoices.WaterMeter.InstallationDate, StringFormat='{0:MMMM dd, yyyy}'}" Grid.Row="5" Grid.Column="1" />
+
+          
+                    <Label Text="Número de Série:" FontSize="18" Grid.Row="6" FontAttributes="Bold"  />
+                <Label Text="{Binding Invoices.WaterMeterService.SerialNumber}" Grid.Row="6" Grid.Column="1" />
+            </Grid>
+            </Frame>
+         
+            <Label Text="Detalhes do Consumo" FontSize="24" HorizontalOptions="Center" FontAttributes="Bold" Margin="10"  />
+            <Frame HorizontalOptions="FillAndExpand"
+CornerRadius="25"
+     Padding="0"
+BackgroundColor="{StaticResource Magenta}"
+
+VerticalOptions="Center">
+                <Grid Padding="10" RowSpacing="10" ColumnSpacing="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+
+                    <Label Text="Data do Consumo:" FontSize="18" Grid.Row="0" FontAttributes="Bold" />
+                <Label Text="{Binding Invoices.Consumption.ConsumptionDate, StringFormat='{0:MMMM dd, yyyy}'}" Grid.Row="0" Grid.Column="1" />
+
+
+                    <Label Text="Leitura do contador:" FontSize="18" Grid.Row="1" FontAttributes="Bold"/>
+                <Label Text="{Binding Invoices.Consumption.ConsumptionValue}" Grid.Row="1" Grid.Column="1" />
+            </Grid>
+            </Frame>
+
+
+        </StackLayout>
+    </ScrollView>
+
+
 </ContentPage>

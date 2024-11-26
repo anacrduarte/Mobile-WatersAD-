@@ -1,8 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using WatersAD.Services;
+﻿using WatersAD.Services;
 using WatersAD.Validator;
-using WatersAD.ViewModels;
-using WatersAD.Views;
 
 namespace WatersAD
 {
@@ -10,25 +7,25 @@ namespace WatersAD
     {
         private readonly IDataValidator _dataValidator;
         private readonly AuthService _authService;
-		private readonly INavigationService _navigationService;
-		private readonly ApiService _apiService;
+        private readonly INavigationService _navigationService;
+        private readonly ApiService _apiService;
 
-        public App(ApiService apiService, IDataValidator dataValidator,AuthService authService, INavigationService navigationService)
+        public App(ApiService apiService, IDataValidator dataValidator, AuthService authService, INavigationService navigationService)
         {
             InitializeComponent();
 
-            
+
             _dataValidator = dataValidator;
             _authService = authService;
-			_navigationService = navigationService;
-			_apiService = apiService;
+            _navigationService = navigationService;
+            _apiService = apiService;
 
             SetMainPage();
         }
 
         private void SetMainPage()
         {
-          
+
 
             MainPage = new AppShell(_apiService, _dataValidator, _authService, _navigationService);
         }

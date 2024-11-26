@@ -2,8 +2,10 @@
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 using WatersAD.Models;
 using WatersAD.Services;
+using WatersAD.Views;
 
 namespace WatersAD.ViewModels
 {
@@ -189,6 +191,8 @@ namespace WatersAD.ViewModels
 
 		public async Task SendRequestAsync()
 		{
+			
+
 			string validationMessage = ValidateFields();
 
 			if (!string.IsNullOrEmpty(validationMessage))
@@ -230,75 +234,133 @@ namespace WatersAD.ViewModels
 				{
 
 					await Application.Current!.MainPage!.DisplayAlert("Sucesso", "Pedido enviado com sucesso!", "OK");
-					await _navigationService.SetMainPageAsync<AppShell>();
-				}
+					CleanFields();
+					
+                    return;
+                }
 				else
 				{
 
 					await Application.Current!.MainPage!.DisplayAlert("Erro", "Pedido não finalizado, por favor tente mais tarde", "OK");
-					await _navigationService.SetMainPageAsync<AppShell>();
+					return;
 				}
 			}
 			catch (Exception ex)
 			{
 				await Application.Current!.MainPage!.DisplayAlert("Erro", $"Erro {ex.Message}", "OK");
-				await _navigationService.SetMainPageAsync<AppShell>();
-			}
+				//await _navigationService.SetMainPageAsync<AppShell>();
+				await NavigateToHome();
+            }
 		}
+        private async Task NavigateToHome()
+        {
 
-		public string ValidateFields()
+            await _navigationService.NavigateToAsync<HomePage>();
+        }
+
+        public void CleanFields()
 		{
-			var errors = new List<string>();
+			FirstName = string.Empty;
+					LastName = string.Empty;
+            Address = string.Empty;
+            Email = string.Empty;
+            Nif = string.Empty;
+            PhoneNumber = string.Empty;
+            HouseNumber = string.Empty;
+            PostalCode = string.Empty;
+            RemainPostalCode = string.Empty;
+          
+					AddressWaterMeter = string.Empty;
+            HouseNumberWaterMeter = string.Empty;
+            PostalCodeWaterMeter = string.Empty;
+            RemainPostalCodeWaterMeter = string.Empty;
+          
 
-			
-			if (string.IsNullOrWhiteSpace(FirstName))
-				errors.Add("O campo 'Primeiro Nome' é obrigatório.");
+        }
+        public string ValidateFields()
+        {
+            var errors = new List<string>();
 
-			if (string.IsNullOrWhiteSpace(LastName))
-				errors.Add("O campo 'Último Nome' é obrigatório.");
+       
+            if (string.IsNullOrWhiteSpace(FirstName))
+                errors.Add("O campo 'Primeiro Nome' é obrigatório.");
+            else if (FirstName.Length > 50)
+                errors.Add("O campo 'Primeiro Nome' pode conter no máximo 50 caracteres.");
 
-			if (string.IsNullOrWhiteSpace(Address))
-				errors.Add("O campo 'Endereço' é obrigatório.");
+            if (string.IsNullOrWhiteSpace(LastName))
+                errors.Add("O campo 'Último Nome' é obrigatório.");
+            else if (LastName.Length > 50)
+                errors.Add("O campo 'Último Nome' pode conter no máximo 50 caracteres.");
 
-			if (string.IsNullOrWhiteSpace(Email))
-				errors.Add("O campo 'Email' é obrigatório.");
+            if (string.IsNullOrWhiteSpace(Address))
+                errors.Add("O campo 'Endereço' é obrigatório.");
+            else if (Address.Length > 100)
+                errors.Add("O campo 'Endereço' pode conter no máximo 100 caracteres.");
+            if (string.IsNullOrWhiteSpace(Email))
+                errors.Add("O campo 'Email' é obrigatório.");
+            else if (!IsValidEmail(Email))
+                errors.Add("O campo 'Email' não tem um formato válido.");
+            if (string.IsNullOrWhiteSpace(Email))
+                errors.Add("O campo 'Email' é obrigatório.");
 
-			if (string.IsNullOrWhiteSpace(Nif))
-				errors.Add("O campo 'NIF' é obrigatório.");
+            if (string.IsNullOrWhiteSpace(Nif))
+                errors.Add("O campo 'NIF' é obrigatório.");
+            else if (!Regex.IsMatch(Nif, @"^\d{9}$"))
+                errors.Add("O 'NIF' deve ter exatamente 9 dígitos.");
 
-			if (string.IsNullOrWhiteSpace(PhoneNumber))
-				errors.Add("O campo 'Número de Telefone' é obrigatório.");
+            if (string.IsNullOrWhiteSpace(PhoneNumber))
+                errors.Add("O campo 'Número de Telefone' é obrigatório.");
 
-			if (string.IsNullOrWhiteSpace(HouseNumber))
-				errors.Add("O campo 'Número da Casa' é obrigatório.");
+            if (string.IsNullOrWhiteSpace(HouseNumber))
+                errors.Add("O campo 'Número da Casa' é obrigatório.");
+            else if (HouseNumber.Length > 100)
+                errors.Add("O campo 'Número da Casa' pode conter no máximo 100 caracteres.");
 
-			if (string.IsNullOrWhiteSpace(PostalCode))
-				errors.Add("O campo 'Código Postal' é obrigatório.");
+            if (string.IsNullOrWhiteSpace(PostalCode))
+                errors.Add("O campo 'Código Postal' é obrigatório.");
+            else if (PostalCode.Length != 4)
+                errors.Add("O campo 'Código Postal' pode conter no máximo 4 caracteres.");
 
-			if (string.IsNullOrWhiteSpace(RemainPostalCode))
-				errors.Add("O campo 'Complemento do Código Postal' é obrigatório.");
+            if (string.IsNullOrWhiteSpace(RemainPostalCode))
+                errors.Add("O campo 'Complemento do Código Postal' é obrigatório.");
+            else if (RemainPostalCode.Length != 3)
+                errors.Add("O campo 'Complemento do Código Postal' pode conter no máximo 3 caracteres.");
 
-			if (string.IsNullOrWhiteSpace(AddressWaterMeter))
-				errors.Add("O campo 'Morada do Contador' é obrigatório.");
+            if (string.IsNullOrWhiteSpace(AddressWaterMeter))
+                errors.Add("O campo 'Morada do Contador' é obrigatório.");
+            else if (AddressWaterMeter.Length > 100)
+                errors.Add("O campo 'Morada do Contador' pode conter no máximo 100 caracteres.");
 
-			if (string.IsNullOrWhiteSpace(HouseNumberWaterMeter))
-				errors.Add("O campo 'Número da Casa do Contador' é obrigatório.");
+            if (string.IsNullOrWhiteSpace(HouseNumberWaterMeter))
+                errors.Add("O campo 'Número da Casa do Contador' é obrigatório.");
+            else if (HouseNumberWaterMeter.Length > 100)
+                errors.Add("O campo 'Número da Casa do Contador' pode conter no máximo 100 caracteres.");
 
-			if (string.IsNullOrWhiteSpace(PostalCodeWaterMeter))
-				errors.Add("O campo 'Código Postal do Contador' é obrigatório.");
+            if (string.IsNullOrWhiteSpace(PostalCodeWaterMeter))
+                errors.Add("O campo 'Código Postal do Contador' é obrigatório.");
+            else if (PostalCodeWaterMeter.Length != 4)
+                errors.Add("O campo 'Código Postal do Contador' pode conter no máximo 4 caracteres.");
 
-			if (string.IsNullOrWhiteSpace(RemainPostalCodeWaterMeter))
-				errors.Add("O campo 'Complemento do Código Postal do Contador' é obrigatório.");
+            if (string.IsNullOrWhiteSpace(RemainPostalCodeWaterMeter))
+                errors.Add("O campo 'Complemento do Código Postal do Contador' é obrigatório.");
+            else if (RemainPostalCodeWaterMeter.Length != 3)
+                errors.Add("O campo 'Complemento do Código Postal do Contador' pode conter no máximo 3 caracteres.");
 
-			if (LocalityWM.Id <= 0)
-				errors.Add("O campo 'Localidade do Contador' é obrigatório.");
+           
 
 			if (errors.Any())
-			{
-				return string.Join("\n", errors);
-			}
+            {
+                return string.Join("\n", errors);
+            }
 
-			return string.Empty;
-		}
-	}
+            return string.Empty;
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            var emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+            return Regex.IsMatch(email, emailPattern);
+        }
+
+    }
 }

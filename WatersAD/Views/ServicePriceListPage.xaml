@@ -4,43 +4,81 @@
              x:Class="WatersAD.Views.ServicePriceListPage"
                 xmlns:viewModels="clr-namespace:WatersAD.ViewModels"
              x:DataType="viewModels:TiersViewModel" 
-             Title="Tabela de Preços">
+             Title="Tabela de Preços"
+             >
 
     <ScrollView>
-        <StackLayout Padding="10">
-            <!-- Cabeçalho da Tabela -->
-            <Grid Padding="10" BackgroundColor="LightBlue">
+        
+        <StackLayout  Spacing="15">
+
+            <Image Source="water.jpg" 
+                   Aspect="AspectFill"
+                   HeightRequest="300" 
+                   HorizontalOptions="Fill"
+                   Margin="0,0,0,5" />
+   
+            <Grid Padding="15"  BackgroundColor="{StaticResource Magenta}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <!-- TierName -->
                     <ColumnDefinition Width="*"/>
-                    <!-- TierPrice -->
                     <ColumnDefinition Width="*"/>
-                    <!-- UpperLimit -->
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0" Text="Escalão" FontAttributes="Bold" VerticalOptions="Center" />
-                <Label Grid.Column="1" Text="Preço" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
-                <Label Grid.Column="2" Text="Limite" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                <Label Grid.Column="0" 
+                       Text="Escalão" 
+                       FontAttributes="Bold" 
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center"
+                       TextColor="{StaticResource PrimaryDarkText}" />
+
+                <Label Grid.Column="1" 
+                       Text="Preço" 
+                       FontAttributes="Bold" 
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center"
+                       TextColor="{StaticResource PrimaryDarkText}" />
+
+                <Label Grid.Column="2" 
+                       Text="Limite (m³)" 
+                       FontAttributes="Bold" 
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center"
+                       TextColor="{StaticResource PrimaryDarkText}" />
             </Grid>
 
-            <!-- CollectionView com os dados -->
+    
             <CollectionView ItemsSource="{Binding AllTiers}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Padding="10" Margin="5" BackgroundColor="LightGray">
+                        <Grid Padding="10" 
+                              Margin="5" 
+                              BackgroundColor="{StaticResource Secondary}" 
+                              >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <!-- TierName -->
                                 <ColumnDefinition Width="*"/>
-                                <!-- TierPrice -->
                                 <ColumnDefinition Width="*"/>
-                                <!-- UpperLimit -->
                             </Grid.ColumnDefinitions>
 
-                            <Label Grid.Column="0" Text="{Binding TierName}" VerticalOptions="Center"/>
-                            <Label Grid.Column="1" Text="{Binding TierPrice, StringFormat='{}{0:C}'}" VerticalOptions="Center" HorizontalOptions="Center"/>
-                            <Label Grid.Column="2" Text="{Binding UpperLimit}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <Label Grid.Column="0" 
+                                   Text="{Binding TierName}" 
+                                   VerticalOptions="Center"
+                                   TextColor="{StaticResource Magenta}" 
+                                   FontSize="Medium"/>
+
+                            <Label Grid.Column="1" 
+                                   Text="{Binding TierPrice, StringFormat='{}{0:C}'}" 
+                                   VerticalOptions="Center" 
+                                   HorizontalOptions="Center" 
+                                   TextColor="{StaticResource Magenta}" 
+                                   FontSize="Medium"/>
+
+                            <Label Grid.Column="2" 
+                                   Text="{Binding UpperLimit}" 
+                                   VerticalOptions="Center" 
+                                   HorizontalOptions="Center" 
+                                   TextColor="{StaticResource Magenta}" 
+                                   FontSize="Medium"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

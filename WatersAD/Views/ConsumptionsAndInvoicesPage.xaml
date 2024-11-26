@@ -5,38 +5,95 @@
               xmlns:viewModels="clr-namespace:WatersAD.ViewModels"
                x:DataType="viewModels:ConsumptionInvoiceViewModel" 
              xmlns:models="clr-namespace:WatersAD.Models"
-             Title="ConsumptionsAndInvoicesPage">
+             Title="Consumos e Faturas" >
 
-    <StackLayout Padding="10">
-  
-        <ScrollView>
+
+    <ScrollView>
+
+        <VerticalStackLayout>
+            <StackLayout Padding="20" Spacing="20" HorizontalOptions="FillAndExpand">
+     
+                <Label Text="Filtrar por Ano" 
+           FontSize="18" 
+           FontAttributes="Bold" 
+           HorizontalOptions="Start"
+           TextColor="{StaticResource PrimaryDarkText}" />
+
+             
+                <Frame Padding="0"
+           HasShadow="True"
+           BackgroundColor="White"
+           CornerRadius="10"
+           BorderColor="#dcdcdc">
+                    <Picker SelectedItem="{Binding SelectedYear}" 
+                ItemsSource="{Binding Years}" 
+                BackgroundColor="White"
+                TextColor="{StaticResource PrimaryDarkText}"
+                HorizontalOptions="FillAndExpand" />
+                </Frame>
+            </StackLayout>
+
+
+
+            <StackLayout Padding="10" >
+        
+       
             <CollectionView ItemsSource="{Binding Consumptions}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Consumption">
-                     
-                        <StackLayout Padding="10" Margin="0,0,0,10" BackgroundColor="#f9f9f9">
-                            <Label Text="Consumo:" FontAttributes="Bold" />
-                            <Label Text="{Binding consumptionValue}" />
+                        <Frame Padding="15"
+                   Margin="10,0,10,10"
+                   BackgroundColor="#f9f9f9"
+                   CornerRadius="15" 
+                   HasShadow="True"
+                   BorderColor="#dcdcdc">
+
+                        
+                            <StackLayout Spacing="5">
+                                <Label Text="Morada:" FontAttributes="Bold" />
+
+                                <StackLayout Orientation="Horizontal" Spacing="5">
+                                    <Label Text="{Binding WaterMeter.FullAdress}" />
+                                    <Label Text="," TextColor="{StaticResource PrimaryDarkText}" />
+                                    <Label Text="{Binding WaterMeter.Locality.Name}"  />
+                                    <Label Text="," TextColor="{StaticResource PrimaryDarkText}" />
+
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Spacing="5">
+
+                                    <Label Text="{Binding WaterMeter.Locality.City.Name}" />
+                                    <Label Text="," TextColor="{StaticResource PrimaryDarkText}" />
+                                    <Label Text="{Binding WaterMeter.Locality.City.Country.Name}"  />
+                                </StackLayout>
+                                <Label Text="Consumo:" FontAttributes="Bold" />
+                            <Label Text="{Binding ConsumptionValue}" />
 
                             <Label Text="Data de Consumo:" FontAttributes="Bold" />
-                            <Label Text="{Binding consumptionDate, StringFormat='{0:dd/MM/yyyy}'}" />
+                            <Label Text="{Binding ConsumptionDate, StringFormat='{0:dd/MM/yyyy}'}" />
 
-                            <Label Text="Endereço:" FontAttributes="Bold" />
-                            <Label Text="{Binding waterMeter.fullAdress}" />
+                          
 
-                            <Label Text="Fatura:" FontAttributes="Bold" />
-                            <Label Text="{Binding invoice.totalAmount, StringFormat='R$ {0:F2}'}" />
+                                <Label Text="Data da fatra:" FontAttributes="Bold" />
+                                <Label Text="{Binding Invoice.InvoiceDate, StringFormat='{0:dd/MM/yyyy}'}" />
 
-                         
+                                <Label Text="Fatura:" FontAttributes="Bold" />
+                            <Label Text="{Binding Invoice.TotalAmount, StringFormat='€ {0:F2}'}" />
+
+
+                            
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer 
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ConsumptionInvoiceViewModel}}, Path=DetailsDataCommand}"
-                                     CommandParameter="{Binding invoice.id}" />
+                                     CommandParameter="{Binding Invoice.Id}" />
                             </StackLayout.GestureRecognizers>
-                        </StackLayout>
+                            </StackLayout>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </ScrollView>
-    </StackLayout>
+       
+        </StackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+        
 </ContentPage>

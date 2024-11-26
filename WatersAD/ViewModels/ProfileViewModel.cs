@@ -15,6 +15,7 @@ namespace WatersAD.ViewModels
 		private readonly IDataValidator _dataValidator;
 		private readonly ApiService _apiService;
 		private readonly INavigationService _navigationService;
+
 		[ObservableProperty]
 		private string firstName = null!;
 
@@ -48,10 +49,12 @@ namespace WatersAD.ViewModels
 			_dataValidator = dataValidator;
 			_apiService = apiService;
 			_navigationService = navigationService;
-			ChangeImageInCommand = new AsyncRelayCommand(SelectImage);
-            ChangeDataInCommand = new AsyncRelayCommand(ChangeData);
+			ChangeImageInCommand = new AsyncRelayCommand(async () => await SelectImage());
+            ChangeDataInCommand = new AsyncRelayCommand(async () => await ChangeData());
 
         }
+
+
 		public void Initialize()
 		{
 
@@ -61,7 +64,7 @@ namespace WatersAD.ViewModels
            
      
 
-            if( !string.IsNullOrEmpty( ImageUrl ))
+            if( !string.IsNullOrEmpty( ImageUrl ) && !ImageUrl.Contains("noimage.png"))
             {
                 ImagePath = $"{AppConfig.BaseUrl.TrimEnd('/')}/{ImageUrl.TrimStart('~', '/')}";
             }
@@ -80,19 +83,19 @@ namespace WatersAD.ViewModels
             _selectedImageBytes = await SelectImageAsync();
             if (_selectedImageBytes == null)
             {
-                ErrorMessage = "No image selected";
+                await Application.Current!.MainPage!.DisplayAlert("Erro", "Nenhuma imagem selecionada.", "OK");
             }
         }
 
         private async Task ChangeData()
         {
-            if (_selectedImageBytes == null)
-            {
-                ErrorMessage = "Please select an image first.";
-                return;
-            }
+            //if (_selectedImageBytes == null)
+            //{
+            //    await Application.Current!.MainPage!.DisplayAlert("Erro", "Tem que ter imagem.", "OK");
+            //    return;
+            //}
 
-   
+
             await UploadUserDataWithImageAsync(FirstName, LastName, _selectedImageBytes);
         }
 
@@ -106,7 +109,7 @@ namespace WatersAD.ViewModels
             }
             catch (Exception ex)
             {
-                ErrorMessage = $"An error occurred: {ex.Message}";
+                await Application.Current!.MainPage!.DisplayAlert("Erro", $"{ex.Message}.", "OK");
             }
         }
 
@@ -129,40 +132,55 @@ namespace WatersAD.ViewModels
             }
             catch (Exception ex)
             {
-                ErrorMessage = $"Error selecting image: {ex.Message}";
+                await Application.Current!.MainPage!.DisplayAlert("Erro", $"{ex.Message}.", "OK");
             }
             return null;
         }
 
-        public async Task UploadUserDataAsync(string firstName, string lastName, byte[] imageBytes, string fileName)
+        public async Task UploadUserDataAsync(string firstName, string lastName, byte[]? imageBytes, string fileName)
         {
             using (var client = new HttpClient())
             {
                 userName = Preferences.Get("username", string.Empty);
-                
+
                 var content = new MultipartFormDataContent();
 
-               
+ 
                 content.Add(new StringContent(firstName), "FirstName");
                 content.Add(new StringContent(lastName), "LastName");
                 content.Add(new StringContent(userName), "UserName");
-              
-                var imageContent = new ByteArrayContent(imageBytes);
-                imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
-                content.Add(imageContent, "ImageFile", fileName);
 
-                var response = await _apiService.UpdateUserDataAsync(content);
-                if (response.Success)
+
+                if (imageBytes != null)
                 {
-                   ErrorMessage = "Data uploaded successfully!";
-                   
+                    var imageContent = new ByteArrayContent(imageBytes);
+                    imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
+                    content.Add(imageContent, "ImageFile", fileName);
                 }
-                else
+
+                try
                 {
-                    ErrorMessage = "Failed to upload data";
+                    var response = await _apiService.UpdateUserDataAsync(content);
+
+
+                    if (response.Success)
+                    {
+                    
+                        await Application.Current!.MainPage!.DisplayAlert("Sucesso", "Dados atualizados com sucesso!", "OK");
+                    }
+                    else
+                    {
+                        await Application.Current!.MainPage!.DisplayAlert("Erro", "Falha ao atualizar dados!", "OK");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    
+                    await Application.Current!.MainPage!.DisplayAlert("Erro", $"Ocorreu um erro: {ex.Message}", "OK");
                 }
             }
         }
+
 
 
         private async void NavigateToLogin()

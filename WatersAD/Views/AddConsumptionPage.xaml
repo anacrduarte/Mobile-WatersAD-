@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WatersAD.Views.AddConsumptionPage"
+              xmlns:viewModels="clr-namespace:WatersAD.ViewModels"
+             x:DataType="viewModels:AddCosumptionViewModel" 
+             Title="Adicionar consumo">
+
+    <ScrollView>
+       
+        <VerticalStackLayout Padding="20" Spacing="15" VerticalOptions="Center">
+
+            <Frame Padding="15"
+                   BackgroundColor="White"
+                   CornerRadius="10"
+                   HasShadow="True">
+                <VerticalStackLayout Padding="10" Spacing="15">
+
+                    <Label Text="Contadores:"
+                       FontSize="20"
+                       HorizontalOptions="Start"
+               />
+
+
+        <Picker x:Name="WaterMeterPicker"
+            Title="▼ Contador"
+                ItemsSource="{Binding WaterMeters}" 
+                 ItemDisplayBinding="{Binding FullAdress}"
+                 SelectedItem="{Binding SelectedWaterMeter, Mode=TwoWay}"/>
+
+
+      
+
+
+        <Label Text="Data:"
+           FontSize="20"
+           HorizontalOptions="Start"
+               IsVisible="{Binding IsDateLoaded}" />
+        <Label 
+                FontSize="16"
+                HorizontalOptions="Center" 
+             IsVisible="{Binding IsDateLoaded}" 
+               Text="{Binding ConsumptionDate, StringFormat='{}{0:dd-MM-yyyy}'}"/>
+                    <Label Text="Leitura:"
+     FontSize="20"
+     HorizontalOptions="Start" />
+
+                    <Entry x:Name="ConsumptionEntry"
+           Placeholder="Digite a leitura do consumo"
+           Keyboard="Numeric"
+               Text="{Binding ConsumptionValue}"
+       />
+
+        <Button Text="Guardar Leitura"
+                Command="{Binding AddConsumptionCommand}"
+       />
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

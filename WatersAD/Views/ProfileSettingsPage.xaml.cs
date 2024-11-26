@@ -23,5 +23,5 @@ public partial class ProfileSettingsPage : ContentPage
 
     }
 
-   
+  
 }

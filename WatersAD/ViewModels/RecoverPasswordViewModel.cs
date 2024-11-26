@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WatersAD.Services;
+using WatersAD.Views;
 
 namespace WatersAD.ViewModels
 {
@@ -46,7 +47,14 @@ namespace WatersAD.ViewModels
 				await Application.Current!.MainPage!.DisplayAlert("Erro", "Não foi possível enviar o e-mail de recuperação de senha. Tente novamente mais tarde.", "OK");
 			}
 
-			await _navigationService.SetMainPageAsync<AppShell>();
+			await NavigateToHome();
+			//await _navigationService.SetMainPageAsync<AppShell>();
 		}
-	}
+
+        private async Task NavigateToHome()
+        {
+
+            await _navigationService.NavigateToAsync<HomePage>();
+        }
+    }
 }
