@@ -248,7 +248,7 @@ namespace WatersAD.ViewModels
 			catch (Exception ex)
 			{
 				await Application.Current!.MainPage!.DisplayAlert("Erro", $"Erro {ex.Message}", "OK");
-				//await _navigationService.SetMainPageAsync<AppShell>();
+		
 				await NavigateToHome();
             }
 		}

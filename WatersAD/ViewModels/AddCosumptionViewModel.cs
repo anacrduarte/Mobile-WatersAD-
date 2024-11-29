@@ -39,22 +39,31 @@ namespace WatersAD.ViewModels
 
         public async Task Initialize()
         {
-            try
+
+            if (DateTime.Now.Day >= 28 || DateTime.Now.Day <= 8)
             {
-                var email = Preferences.Get("username", string.Empty);
-                if (string.IsNullOrEmpty(email))
+                try
                 {
-                    return;
+                    var email = Preferences.Get("username", string.Empty);
+                    if (string.IsNullOrEmpty(email))
+                    {
+                        return;
+                    }
+                    var response = await _apiService.GetWaterMeters(email);
+
+                    WaterMeters = new ObservableCollection<WaterMeter>(response.WaterMeters!);
+
+
                 }
-                var response = await _apiService.GetWaterMeters(email);
-
-                WaterMeters = new ObservableCollection<WaterMeter>(response.WaterMeters!);
-
-
+                catch (Exception)
+                {
+                    await Application.Current!.MainPage!.DisplayAlert("Erro", "Não foi possível carregar a lista de contadores. Tente novamente mais tarde.", "OK");
+                    await NavigateToHome();
+                }
             }
-            catch (Exception)
+            else
             {
-                await Application.Current!.MainPage!.DisplayAlert("Erro", "Não foi possível carregar a lista de contadores. Tente novamente mais tarde.", "OK");
+                await _navigationService.NavigateToAsync<InfoConsumptionPage>();
             }
 
 
@@ -84,7 +93,7 @@ namespace WatersAD.ViewModels
             {
                 await Application.Current!.MainPage!.DisplayAlert("Erro", $"Erro {ex.Message}", "OK");
                 await NavigateToHome();
-                //await _navigationService.SetMainPageAsync<AppShell>();
+              
             }
           
 
@@ -122,21 +131,21 @@ namespace WatersAD.ViewModels
                 {
 
                     await Application.Current!.MainPage!.DisplayAlert("Sucesso", "Consumo adicionado com sucesso!", "OK");
-                    //await _navigationService.SetMainPageAsync<AppShell>();
+                 
                     await NavigateToHome();
                 }
                 else
                 {
 
-                    await Application.Current!.MainPage!.DisplayAlert("Erro", "Consumo não finalizado, por favor tente mais tarde", "OK");
-                    //await _navigationService.SetMainPageAsync<AppShell>();
+                    await Application.Current!.MainPage!.DisplayAlert("Erro", "Consumo não finalizado, por favor tente mais tarde, relembramos que o valor de consumo tem que ser superior ao mês anterior.", "OK");
+                  
                     await NavigateToHome();
                 }
             }
             catch (Exception ex)
             {
                 await Application.Current!.MainPage!.DisplayAlert("Erro", $"Erro {ex.Message}", "OK");
-                //await _navigationService.SetMainPageAsync<AppShell>();
+          
                 await NavigateToHome();
             }
         }

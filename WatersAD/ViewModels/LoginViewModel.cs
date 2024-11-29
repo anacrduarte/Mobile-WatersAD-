@@ -71,9 +71,7 @@ namespace WatersAD.ViewModels
                     EmailErrorMessage = string.Empty;
                     PasswordErrorMessage = string.Empty;
                     await ReconfigureShellAsync();
-                    //await NavigateToHome();
-                    //await _navigationService.SetMainPageAsync<AppShell>();
-                    //Application.Current!.MainPage = new AppShell(_apiService, _validator, _authService, _navigationService);
+                   
                 }
                 else
                 {
@@ -101,10 +99,10 @@ namespace WatersAD.ViewModels
 
         private async Task ReconfigureShellAsync()
         {
-            // Obtenha o estado de login novamente
+         
             bool isUserLoggedIn = _authService.IsLoggedIn();
 
-            // Redefine o Shell
+       
             var shell = Application.Current.MainPage as AppShell;
             shell.Items.Clear();
 

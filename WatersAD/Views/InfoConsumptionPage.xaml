@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WatersAD.Views.InfoConsumptionPage"
+             Title="Informação" BackgroundColor="{StaticResource Secondary}">
+    <Grid RowDefinitions="Auto,*" RowSpacing="0" VerticalOptions="Center" Margin="15">
+        <Frame Padding="15"
+           BackgroundColor="White"
+           CornerRadius="10"
+           HasShadow="True">
+            <VerticalStackLayout Margin="20" Spacing="20" HorizontalOptions="Center" VerticalOptions="Center">
+               
+                <Image Source="forb" WidthRequest="100" HeightRequest="100" Aspect="AspectFit"/>
+
+             
+                <Label Text="Só é possível inserir consumos entre os dias 28 e 8 de cada mês."
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>

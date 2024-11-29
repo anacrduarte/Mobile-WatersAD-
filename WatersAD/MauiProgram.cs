@@ -40,6 +40,7 @@ namespace WatersAD
             builder.Services.AddTransient<QuestionsPage>();
             builder.Services.AddTransient<InvoiceDetailsPage>();
             builder.Services.AddTransient<HomePage>();
+            builder.Services.AddTransient<InfoConsumptionPage>();
 
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<ProfileViewModel>();

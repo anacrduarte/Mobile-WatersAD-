@@ -48,7 +48,7 @@ namespace WatersAD.ViewModels
 			}
 
 			await NavigateToHome();
-			//await _navigationService.SetMainPageAsync<AppShell>();
+		
 		}
 
         private async Task NavigateToHome()

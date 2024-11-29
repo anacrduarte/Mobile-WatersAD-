@@ -87,11 +87,11 @@ namespace WatersAD.ViewModels
 					Preferences.Set("lastname", string.Empty);
 					Preferences.Set("imageurl", string.Empty);
 
-					//await NavigateToHome();
+					
 
                     await ReconfigureShellAsync();
 
-                    //await _navigationService.SetMainPageAsync<AppShell>();
+                
 
 
                 }
@@ -134,10 +134,10 @@ namespace WatersAD.ViewModels
 
         private async Task ReconfigureShellAsync()
         {
-            // Obtenha o estado de login novamente
+            
             bool isUserLoggedIn = _authService.IsLoggedIn();
 
-            // Redefine o Shell
+            
             var shell = Application.Current.MainPage as AppShell;
             shell.Items.Clear();
 

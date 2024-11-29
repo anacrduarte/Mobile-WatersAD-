@@ -97,7 +97,9 @@ namespace WatersAD.Services
 
 		private async Task<HttpResponseMessage> PostRequest(string uri, HttpContent content)
 		{
-			var enderecoUrl = AppConfig.BaseUrl + uri;
+			AddAuthorizationHeader();
+
+            var enderecoUrl = AppConfig.BaseUrl + uri;
 			try
 			{
 				var result = await _httpClient.PostAsync(enderecoUrl, content);

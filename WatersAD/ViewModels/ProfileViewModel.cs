@@ -89,11 +89,7 @@ namespace WatersAD.ViewModels
 
         private async Task ChangeData()
         {
-            //if (_selectedImageBytes == null)
-            //{
-            //    await Application.Current!.MainPage!.DisplayAlert("Erro", "Tem que ter imagem.", "OK");
-            //    return;
-            //}
+         
 
 
             await UploadUserDataWithImageAsync(FirstName, LastName, _selectedImageBytes);

@@ -78,14 +78,15 @@ namespace WatersAD.ViewModels
 				}
 				var response = await _apiService.GetConsumptionsAndInvoices(email);
 
-				Consumptions = new ObservableCollection<Consumption>(response.Consumptions!);
+				Consumptions = new ObservableCollection<Consumption>(response.Consumptions!.OrderByDescending(c => c.ConsumptionDate));
 
 
             }
 			catch (Exception)
 			{
-				await Application.Current!.MainPage!.DisplayAlert("Erro", "Não foi possível carregar a lista de países. Tente novamente mais tarde.", "OK");
-			}
+				await Application.Current!.MainPage!.DisplayAlert("Erro", "Não foi possível carregar a lista de consumos. Tente novamente mais tarde.", "OK");
+                await _navigationService.NavigateToAsync<HomePage>();
+            }
 
 
 		}
